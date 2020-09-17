@@ -18,6 +18,9 @@
             <e p="PixelNostalgiaSettings.cs" t="Include" />
           </e>
         </e>
+        <e p="Scripts" t="Include">
+          <e p="HammerMovement.cs" t="Include" />
+        </e>
       </e>
       <e p="HandSmacker1.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
