@@ -21,6 +21,7 @@
         <e p="Scripts" t="Include">
           <e p="HammerAttack.cs" t="Include" />
           <e p="HammerMovement.cs" t="Include" />
+          <e p="NutSpawner.cs" t="Include" />
         </e>
       </e>
       <e p="HandSmacker1.sln" t="IncludeFlat" />

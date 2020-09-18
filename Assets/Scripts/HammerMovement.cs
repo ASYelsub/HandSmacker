@@ -47,10 +47,10 @@ public class HammerMovement : MonoBehaviour
             if (hingeTransform.position.x >= xMax)
             {
                 goingRight = !goingRight;
+                RandomizeMovementSpeed();
             }
             else if (hingeTransform.position.x < xMax)
             {
-                RandomizeMovementSpeed();
                 movementVector = new Vector3(movementSpeed,0,0);
             }
         }
@@ -58,11 +58,11 @@ public class HammerMovement : MonoBehaviour
         {
             if (hingeTransform.position.x <= xMin)
             {
+                RandomizeMovementSpeed();
                 goingRight = !goingRight;
             }
             else if (hingeTransform.position.x > xMin)
             {
-                RandomizeMovementSpeed();
                 movementVector = new Vector3(-movementSpeed,0,0);
             }
         }
