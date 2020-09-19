@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 804036357251733163}
   - component: {fileID: 804036357251733162}
   - component: {fileID: 804036357251733161}
+  - component: {fileID: 3122339129630520016}
   m_Layer: 0
   m_Name: Pecan
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 804036357251733160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.21, y: 0.44, z: -7.65}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.22065, y: 0.22065, z: 0.22065}
   m_Children: []
   m_Father: {fileID: 0}
@@ -93,3 +94,17 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3122339129630520016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804036357251733160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 686b79fae07514fe490915b521d3e8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nutVector: {x: -0.03, y: 0, z: 0}
+  nutLimit: {x: -5.03, y: 0, z: 0}
