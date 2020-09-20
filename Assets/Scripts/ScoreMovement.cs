@@ -8,6 +8,7 @@ public class ScoreMovement : MonoBehaviour
 {
     private RectTransform scoreTextTransform;
     private Text scoreTextText;
+    [SerializeField]private Text scoreMultiplierText;
 
     [SerializeField]
     private Vector3[] textPosition;
@@ -19,6 +20,7 @@ public class ScoreMovement : MonoBehaviour
     {
         scoreTextTransform = gameObject.GetComponent<RectTransform>();
         scoreTextText = gameObject.GetComponent<Text>();
+        //scoreMultiplierText = gameObject.GetComponentInChildren<Text>();
         scoreTextTransform.anchoredPosition = textPosition[0];
     }
 
@@ -43,6 +45,11 @@ public class ScoreMovement : MonoBehaviour
             textPosInt = 0;
         }
         scoreTextTransform.anchoredPosition = textPosition[textPosInt];
-        
     }
+
+    public void UpdateScoreMultiplier(int adjustScoreMultipiler)
+    {
+        scoreMultiplierText.text = "x " + adjustScoreMultipiler.ToString();
+    }
+    
 }

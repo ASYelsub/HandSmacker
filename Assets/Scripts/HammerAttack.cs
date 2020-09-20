@@ -19,6 +19,7 @@ public class HammerAttack : MonoBehaviour
     [Header("Other Scripts")]
     [SerializeField] private ScoreMovement scoreMovement;
     [SerializeField] private NutSpawner nutSpawner;
+    [SerializeField] private CameraShake cameraShake;
 
     [SerializeField] private float hammerDownTimeLimit;
     [SerializeField] private float hammerUpTimeLimit;
@@ -82,6 +83,7 @@ public class HammerAttack : MonoBehaviour
                 //firework.Emit(1);
                 int fireworkTimerInt = (int) fireworkTimer;
                 firework.Emit(fireworkTimerInt);
+                scoreMovement.UpdateScoreMultiplier(fireworkTimerInt);
                 fireworkTimer = 0;
             }
         }
@@ -112,5 +114,6 @@ public class HammerAttack : MonoBehaviour
         hingeAudioSource.PlayOneShot(nutCrunch);
         Destroy(other.gameObject);
         scoreMovement.UpdateScore(score);
+        StartCoroutine(cameraShake.Shake(cameraShake.duration, cameraShake.magnitude));
     }
 }
