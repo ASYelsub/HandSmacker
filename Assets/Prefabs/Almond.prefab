@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4130969150435020101}
   - component: {fileID: 4130969150435020102}
   - component: {fileID: 4130969150435020103}
-  - component: {fileID: 4130969150435020096}
   - component: {fileID: -8004478629367389218}
+  - component: {fileID: -5026236477691769485}
   m_Layer: 0
   m_Name: Almond
   m_TagString: Untagged
@@ -81,19 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &4130969150435020096
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4130969150435020097}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-8004478629367389218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,3 +95,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nutVector: {x: -0.01, y: 0, z: 0}
   nutLimit: {x: -5.03, y: 0, z: 0}
+--- !u!65 &-5026236477691769485
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4130969150435020097}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_Center: {x: 0, y: 0, z: 0}

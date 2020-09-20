@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6774785700647072765}
   - component: {fileID: 6774785700647072764}
   - component: {fileID: 6774785700647072767}
-  - component: {fileID: 6774785700647072766}
   - component: {fileID: 1543181699034741464}
+  - component: {fileID: -1183178841808656304}
   m_Layer: 0
   m_Name: Cashew
   m_TagString: Untagged
@@ -81,19 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6774785700647072766
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6774785700647072753}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1543181699034741464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,3 +95,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nutVector: {x: -0.02, y: 0, z: 0}
   nutLimit: {x: -5.03, y: 0, z: 0}
+--- !u!65 &-1183178841808656304
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6774785700647072753}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_Center: {x: 0, y: 0, z: 0}

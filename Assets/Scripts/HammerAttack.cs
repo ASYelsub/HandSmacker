@@ -16,8 +16,9 @@ public class HammerAttack : MonoBehaviour
     public int score;
     private float timer = 0f;
 
-    [SerializeField]
-    private ScoreMovement scoreMovement;
+    [Header("Other Scripts")]
+    [SerializeField] private ScoreMovement scoreMovement;
+    [SerializeField] private NutSpawner nutSpawner;
 
     [SerializeField] private float hammerDownTimeLimit;
     [SerializeField] private float hammerUpTimeLimit;
@@ -97,6 +98,7 @@ public class HammerAttack : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        nutSpawner.DecreaseNutCount();
         audioPlaying = true;
         score++;
         print(score);
