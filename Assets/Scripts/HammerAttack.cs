@@ -33,6 +33,8 @@ public class HammerAttack : MonoBehaviour
     [SerializeField] private ParticleSystem hammerSpark;
     [SerializeField] private ParticleSystem firework;
 
+    public float fireworkTimer = 0;
+
     private bool audioPlaying;
     private void Start(){
         hammerIsAttacking = false;
@@ -54,9 +56,11 @@ public class HammerAttack : MonoBehaviour
         }
     }
 
-    private void FixedUpdate(){
-        
+    private void FixedUpdate()
+    {
 
+        fireworkTimer += Time.deltaTime;
+        
         if (hammerIsAttacking)
         {
             if (timer < hammerDownTimeLimit)
@@ -76,6 +80,9 @@ public class HammerAttack : MonoBehaviour
                     hammerSpark.Emit(30);
                 }
                 //firework.Emit(1);
+                int fireworkTimerInt = (int) fireworkTimer;
+                firework.Emit(fireworkTimerInt);
+                fireworkTimer = 0;
             }
         }
         if (hammerIsGoingUp)
@@ -93,7 +100,7 @@ public class HammerAttack : MonoBehaviour
                 audioPlaying = false;
             }
         }
-        
+
     }
 
     private void OnCollisionEnter(Collision other)
