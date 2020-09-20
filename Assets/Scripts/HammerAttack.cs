@@ -19,13 +19,18 @@ public class HammerAttack : MonoBehaviour
     [SerializeField] private float hammerUpTimeLimit;
     [SerializeField] private Vector3 hammerDownVelocity;
     [SerializeField] private Vector3 hammerUpVelocity;
-    
+
+    [SerializeField] private AudioClip[] hammerSound;
+    private AudioSource hingeAudioSource;
+
+    [SerializeField] private ParticleSystem firework;
 
     private void Start(){
         hammerIsAttacking = false;
         hammerIsGoingUp = false;
         hingeObject = gameObject;
         hingeTransform = hingeObject.transform;
+        hingeAudioSource = this.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -54,6 +59,9 @@ public class HammerAttack : MonoBehaviour
                 hammerIsAttacking = false;
                 timer = 0;
                 hammerIsGoingUp = true;
+                int randomInt = UnityEngine.Random.Range(0,hammerSound.Length);
+                hingeAudioSource.PlayOneShot(hammerSound[randomInt]);
+                firework.Emit(20);
             }
         }
         if (hammerIsGoingUp)
