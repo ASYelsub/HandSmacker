@@ -10,6 +10,7 @@ public class CameraShake : MonoBehaviour
     public float duration;
     public float magnitude;
     [SerializeField] private float screenShakeSize;
+    [HideInInspector] public bool corIsRunning = false;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -20,6 +21,7 @@ public class CameraShake : MonoBehaviour
     
     public IEnumerator Shake(float duration, float magnitude)
     {
+        corIsRunning = true;
         Vector3 orignalPosition = transform.position;
         float elapsed = 0f;
         
@@ -33,5 +35,6 @@ public class CameraShake : MonoBehaviour
             yield return 0;
         }
         transform.position = orignalPosition;
+        corIsRunning = false;
     }
 }

@@ -114,6 +114,9 @@ public class HammerAttack : MonoBehaviour
         hingeAudioSource.PlayOneShot(nutCrunch);
         Destroy(other.gameObject);
         scoreMovement.UpdateScore(score);
-        StartCoroutine(cameraShake.Shake(cameraShake.duration, cameraShake.magnitude));
+        if (!cameraShake.corIsRunning)
+        {
+            StartCoroutine(cameraShake.Shake(cameraShake.duration, cameraShake.magnitude));
+        }
     }
 }
