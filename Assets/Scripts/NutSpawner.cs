@@ -60,7 +60,7 @@ public class NutSpawner : MonoBehaviour
             }
             
         }
-        print(nutsMaxed);
+//        print(nutsMaxed);
     }
 
     private void IncreaseNutCount()
@@ -72,6 +72,6 @@ public class NutSpawner : MonoBehaviour
     {
         amountOfNutsOnScreen--;
         nutsMaxed = false;
-        print(maxAmountOfNutsOnScreen);
+//        print(maxAmountOfNutsOnScreen);
     }
 }

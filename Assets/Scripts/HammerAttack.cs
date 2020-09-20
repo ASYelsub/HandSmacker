@@ -13,6 +13,7 @@ public class HammerAttack : MonoBehaviour
     public bool hammerIsAttacking;
     public bool hammerIsGoingUp;
 
+    public int score;
     private float timer = 0f;
 
     [SerializeField] private float hammerDownTimeLimit;
@@ -23,6 +24,9 @@ public class HammerAttack : MonoBehaviour
     [SerializeField] private AudioClip[] hammerSound;
     private AudioSource hingeAudioSource;
 
+    [SerializeField] private AudioClip nutCrunch;
+
+    [SerializeField] private ParticleSystem hammerSpark;
     [SerializeField] private ParticleSystem firework;
 
     private void Start(){
@@ -61,7 +65,8 @@ public class HammerAttack : MonoBehaviour
                 hammerIsGoingUp = true;
                 int randomInt = UnityEngine.Random.Range(0,hammerSound.Length);
                 hingeAudioSource.PlayOneShot(hammerSound[randomInt]);
-                firework.Emit(20);
+                hammerSpark.Emit(30);
+                firework.Emit(1);
             }
         }
         if (hammerIsGoingUp)
@@ -79,5 +84,11 @@ public class HammerAttack : MonoBehaviour
             }
         }
         
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        score++;
+        print(score);
     }
 }
