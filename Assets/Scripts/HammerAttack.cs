@@ -16,6 +16,9 @@ public class HammerAttack : MonoBehaviour
     public int score;
     private float timer = 0f;
 
+    [SerializeField]
+    private ScoreMovement scoreMovement;
+
     [SerializeField] private float hammerDownTimeLimit;
     [SerializeField] private float hammerUpTimeLimit;
     [SerializeField] private Vector3 hammerDownVelocity;
@@ -29,9 +32,11 @@ public class HammerAttack : MonoBehaviour
     [SerializeField] private ParticleSystem hammerSpark;
     [SerializeField] private ParticleSystem firework;
 
+    private bool audioPlaying;
     private void Start(){
         hammerIsAttacking = false;
         hammerIsGoingUp = false;
+        audioPlaying = false;
         hingeObject = gameObject;
         hingeTransform = hingeObject.transform;
         hingeAudioSource = this.GetComponent<AudioSource>();
@@ -63,10 +68,13 @@ public class HammerAttack : MonoBehaviour
                 hammerIsAttacking = false;
                 timer = 0;
                 hammerIsGoingUp = true;
-                int randomInt = UnityEngine.Random.Range(0,hammerSound.Length);
-                hingeAudioSource.PlayOneShot(hammerSound[randomInt]);
-                hammerSpark.Emit(30);
-                firework.Emit(1);
+                if (!audioPlaying)
+                {
+                    int randomInt = UnityEngine.Random.Range(0,hammerSound.Length);
+                    hingeAudioSource.PlayOneShot(hammerSound[randomInt]);
+                    hammerSpark.Emit(30);
+                }
+                //firework.Emit(1);
             }
         }
         if (hammerIsGoingUp)
@@ -81,6 +89,7 @@ public class HammerAttack : MonoBehaviour
                 hammerIsAttacking = false;
                 timer = 0;
                 hammerIsGoingUp = false;
+                audioPlaying = false;
             }
         }
         
@@ -88,7 +97,11 @@ public class HammerAttack : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        audioPlaying = true;
         score++;
         print(score);
+        hingeAudioSource.PlayOneShot(nutCrunch);
+        Destroy(other.gameObject);
+        scoreMovement.UpdateScore(score);
     }
 }
