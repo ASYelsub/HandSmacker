@@ -16,10 +16,12 @@ public class HammerAttack : MonoBehaviour
     public int score;
     private float timer = 0f;
 
+    private int tempint;
     [Header("Other Scripts")]
-    [SerializeField] private ScoreMovement scoreMovement;
+    //[SerializeField] private ScoreMovement scoreMovement;
     [SerializeField] private NutSpawner nutSpawner;
     [SerializeField] private CameraShake cameraShake;
+    [SerializeField] private ScoreNutSpawner scoreNutSpawner;
 
     [SerializeField] private float hammerDownTimeLimit;
     [SerializeField] private float hammerUpTimeLimit;
@@ -83,7 +85,7 @@ public class HammerAttack : MonoBehaviour
                 //firework.Emit(1);
                 int fireworkTimerInt = (int) fireworkTimer;
                 firework.Emit(fireworkTimerInt);
-                scoreMovement.UpdateScoreMultiplier(fireworkTimerInt);
+                //scoreMovement.UpdateScoreMultiplier(fireworkTimerInt);
                 fireworkTimer = 0;
             }
         }
@@ -110,10 +112,22 @@ public class HammerAttack : MonoBehaviour
         nutSpawner.DecreaseNutCount();
         audioPlaying = true;
         score++;
-        print(score);
+        //print(score);
         hingeAudioSource.PlayOneShot(nutCrunch);
+        if (other.gameObject.CompareTag("almond"))
+        {
+            tempint = 0;
+        }else if (other.gameObject.CompareTag("cashew"))
+        {
+            tempint = 1;
+        }else if (other.gameObject.CompareTag("pecan"))
+        {
+            tempint = 2;
+        }
+        scoreNutSpawner.SpawnNut(tempint);
         Destroy(other.gameObject);
-        scoreMovement.UpdateScore(score);
+        print(other.gameObject);
+        //scoreMovement.UpdateScore(score);
         if (!cameraShake.corIsRunning)
         {
             StartCoroutine(cameraShake.Shake(cameraShake.duration, cameraShake.magnitude));

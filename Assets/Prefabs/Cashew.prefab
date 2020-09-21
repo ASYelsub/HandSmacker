@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1183178841808656304}
   m_Layer: 0
   m_Name: Cashew
-  m_TagString: Untagged
+  m_TagString: cashew
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

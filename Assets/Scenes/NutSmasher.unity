@@ -5202,7 +5202,7 @@ MonoBehaviour:
   - {fileID: 6774785700647072753, guid: 38759977e81b94bfa8ee7f6d25604520, type: 3}
   - {fileID: 804036357251733160, guid: b2e16b4f18cc346d39799b1510401429, type: 3}
   initialPos: {x: -5.86, y: 5.2, z: -2.85}
-  initialRot: {x: 0, y: 90, z: 90}
+  initialRot: {x: 0, y: -90, z: 90}
 --- !u!4 &303194546
 Transform:
   m_ObjectHideFlags: 0
@@ -10672,9 +10672,9 @@ MonoBehaviour:
   hammerIsAttacking: 0
   hammerIsGoingUp: 0
   score: 0
-  scoreMovement: {fileID: 1453502358}
   nutSpawner: {fileID: 2033030062}
   cameraShake: {fileID: 111258368}
+  scoreNutSpawner: {fileID: 303194545}
   hammerDownTimeLimit: 0.2
   hammerUpTimeLimit: 0.2
   hammerDownVelocity: {x: 0, y: 8, z: 0}
@@ -11023,7 +11023,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: hold Space to restart
+  m_Text: hold Space for release
 --- !u!222 &1906258137
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -33,15 +33,15 @@ public class ScoreNutSpawner : MonoBehaviour
         nutCount = 0;
     }
 
-    private void Update()
+    /* private void Update()
     {
        if (Input.GetKeyDown(KeyCode.L))
        {
            SpawnNut(nutPrefabs[0]);
        }
-    }
+    }*/
 
-    public void SpawnNut(GameObject nutType)
+    public void SpawnNut(int tempInt)
     {
         nutAmount--;
         nutCount++;
@@ -52,22 +52,9 @@ public class ScoreNutSpawner : MonoBehaviour
         }
         if (nutCount == 147)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(2);
         }
         currentPos = new Vector3(initialPos.x * nutSpacing * nutAmount - 6.8f, initialPos.y * nutSpacing * currentNutHeight + 4.5f,initialPos.z);
-        if (nutType == nutPrefabs[0])
-        {
-            Instantiate(nutPrefabs[0], currentPos, Quaternion.Euler(initialRot));
-        }
-
-        if (nutType == nutPrefabs[1])
-        {
-            Instantiate(nutPrefabs[1], currentPos, Quaternion.Euler(initialRot));
-        }
-
-        if (nutType == nutPrefabs[2])
-        {
-            Instantiate(nutPrefabs[2], currentPos, Quaternion.Euler(initialRot));
-        }
+        Instantiate(nutPrefabs[tempInt], currentPos, Quaternion.Euler(initialRot));
     }
 }

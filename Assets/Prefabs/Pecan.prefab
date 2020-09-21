@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5183589758842557790}
   m_Layer: 0
   m_Name: Pecan
-  m_TagString: Untagged
+  m_TagString: pecan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 804036357251733160}
   m_LocalRotation: {x: -0.27059805, y: 0.6532815, z: -0.27059805, w: 0.6532815}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.22065, y: 0.22065, z: 0.22065}
   m_Children: []
   m_Father: {fileID: 0}
