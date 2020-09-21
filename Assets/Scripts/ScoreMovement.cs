@@ -34,7 +34,7 @@ public class ScoreMovement : MonoBehaviour
 
     public void UpdateScore(int scoreAdd)
     {
-        scoreTextText.text = scoreAdd.ToString();
+//        scoreTextText.text = scoreAdd.ToString();
 
         if (textPosInt < textPosition.Length - 1)
         {

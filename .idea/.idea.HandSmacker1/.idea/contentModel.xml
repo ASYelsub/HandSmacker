@@ -28,6 +28,7 @@
           <e p="NutMovement.cs" t="Include" />
           <e p="NutSpawner.cs" t="Include" />
           <e p="ScoreMovement.cs" t="Include" />
+          <e p="ScoreNutSpawner.cs" t="Include" />
           <e p="StartScript.cs" t="Include" />
         </e>
       </e>
