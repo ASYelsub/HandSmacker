@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 686b79fae07514fe490915b521d3e8b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nutVector: {x: -0.01, y: 0, z: 0}
+  nutVector: {x: -0.02, y: 0, z: 0}
   nutLimit: {x: -5.03, y: 0, z: 0}
 --- !u!65 &-5295269761050127178
 BoxCollider:

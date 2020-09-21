@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StartScreen.unity
+    guid: 1c0e7982222fd41a79a332f0933b8872
+  - enabled: 1
+    path: Assets/Scenes/NutSmasher.unity
+    guid: 40926313f0f154a74af387a701d45e13
+  - enabled: 1
+    path: Assets/Scenes/EndGame.unity
+    guid: a860fbdc30b1041c589829a048a93663
   m_configObjects: {}
