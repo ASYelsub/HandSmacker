@@ -264,10 +264,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'You smashed     nuts
+  m_Text: '
 
+    You fed the body, the mind,
 
-    Banger!'
+    try and try again.
+
+    Game end.'
 --- !u!222 &206802729
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -288,6 +291,7 @@ GameObject:
   - component: {fileID: 278517801}
   - component: {fileID: 278517800}
   - component: {fileID: 278517803}
+  - component: {fileID: 278517804}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -373,6 +377,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _settings: {fileID: 2083541654}
+--- !u!114 &278517804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278517799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6227829046d4bb8902213ca76b37e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &844319275
 GameObject:
   m_ObjectHideFlags: 0

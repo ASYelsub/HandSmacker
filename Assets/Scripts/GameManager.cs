@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
         if (timer >= 4f)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(2);
         }
     }
 }
