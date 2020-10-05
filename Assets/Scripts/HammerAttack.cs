@@ -50,7 +50,7 @@ public class HammerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
             if (!hammerIsAttacking && !hammerIsGoingUp)
             {
