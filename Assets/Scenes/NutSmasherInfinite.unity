@@ -537,7 +537,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.6281542, g: 0.127759, b: 0.8207547, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5103,7 +5103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &218032402
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5201,7 +5201,7 @@ MonoBehaviour:
   - {fileID: 5839209781083398133, guid: 87c97955de70c4d90ad771c0c78d4ce3, type: 3}
   - {fileID: 6774785700647072753, guid: 38759977e81b94bfa8ee7f6d25604520, type: 3}
   - {fileID: 804036357251733160, guid: b2e16b4f18cc346d39799b1510401429, type: 3}
-  initialPos: {x: -5.86, y: 5.2, z: -2.85}
+  initialPos: {x: -6, y: 5.2, z: -2.85}
   initialRot: {x: 0, y: -90, z: 90}
 --- !u!4 &303194546
 Transform:
@@ -10971,7 +10971,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1906258135
 RectTransform:
   m_ObjectHideFlags: 0

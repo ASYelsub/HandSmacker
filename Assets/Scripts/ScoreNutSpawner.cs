@@ -25,6 +25,9 @@ public class ScoreNutSpawner : MonoBehaviour
     private int nutAmount;
     private float nutSpacing;
     private int currentNutHeight;
+
+    private float nutXVal = 6.8f;
+    private float nutYVal = 4.5f;
     private void Start()
     {
         currentNutHeight = 1;
@@ -33,28 +36,55 @@ public class ScoreNutSpawner : MonoBehaviour
         nutCount = 0;
     }
 
-    /* private void Update()
+    private void Update()
     {
-       if (Input.GetKeyDown(KeyCode.L))
+       if (Input.GetKey(KeyCode.L))
        {
-           SpawnNut(nutPrefabs[0]);
+           SpawnNut(0);
        }
-    }*/
+    }
 
     public void SpawnNut(int tempInt)
     {
         nutAmount--;
         nutCount++;
-        if (nutCount == 16 || nutCount == 31 || nutCount == 46 || nutCount == 63 || nutCount == 80 || nutCount == 97 || nutCount == 114 || nutCount == 131)
+        switch (nutCount)
         {
-            currentNutHeight--;
-            nutAmount = -1;
+            case 18:
+            case 35:
+            case 52:
+            case 69:
+            case 86:
+            case 103:
+            case 120:
+            case 137:
+            case 154:
+                currentNutHeight--;
+                nutAmount = -1;
+                break;
+            case 171:
+                currentNutHeight = 1;
+                nutAmount = -2;
+                nutXVal += .4f;
+                nutYVal += .3f;
+                initialPos.z += .1f;
+                //initialPos.x -= .5f;
+                //This only happens in the web version of the game
+                //SceneManager.LoadScene(2);
+                break;
+            case 187:
+            case 203:
+            case 219: 
+            case 235:
+            case 251: 
+            case 267: //need to finish this
+                currentNutHeight--;
+                nutAmount = -2;
+                break;
         }
-        if (nutCount == 147)
-        {
-            SceneManager.LoadScene(2);
-        }
-        currentPos = new Vector3(initialPos.x * nutSpacing * nutAmount - 6.8f, initialPos.y * nutSpacing * currentNutHeight + 4.5f,initialPos.z);
+        //nutXVal = 6.8f at first
+        //nutYVal = 4.5f at first
+        currentPos = new Vector3(initialPos.x * nutSpacing * nutAmount - nutXVal, initialPos.y * nutSpacing * currentNutHeight + nutYVal,initialPos.z);
         Instantiate(nutPrefabs[tempInt], currentPos, Quaternion.Euler(initialRot));
     }
 }
