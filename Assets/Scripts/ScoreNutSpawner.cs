@@ -77,9 +77,19 @@ public class ScoreNutSpawner : MonoBehaviour
             case 219: 
             case 235:
             case 251: 
-            case 267: //need to finish this
+            case 267: 
+            case 283:
+            case 299: 
+            case 315:
                 currentNutHeight--;
                 nutAmount = -2;
+                break;
+            case 331:
+                currentNutHeight = 1;
+                nutAmount = -2;
+                nutXVal += -.1f;
+                nutYVal += -.3f;
+                initialPos.z += -.2f;
                 break;
         }
         //nutXVal = 6.8f at first
@@ -87,4 +97,5 @@ public class ScoreNutSpawner : MonoBehaviour
         currentPos = new Vector3(initialPos.x * nutSpacing * nutAmount - nutXVal, initialPos.y * nutSpacing * currentNutHeight + nutYVal,initialPos.z);
         Instantiate(nutPrefabs[tempInt], currentPos, Quaternion.Euler(initialRot));
     }
+    
 }
