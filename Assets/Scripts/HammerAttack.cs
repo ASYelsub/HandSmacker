@@ -36,6 +36,9 @@ public class HammerAttack : MonoBehaviour
     [SerializeField] private ParticleSystem hammerSpark;
     [SerializeField] private ParticleSystem firework;
 
+    [SerializeField]
+    private GameObject flowerHolder;
+
     public float fireworkTimer = 0;
 
     private bool audioPlaying;
