@@ -5528,6 +5528,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flowerPrefab: {fileID: 9044213085718276254, guid: 96bf1a2211945f545ad202e80b83f6a3,
     type: 3}
+  flowerExpand: 3
+  spacer: 0.4
+  genSpeed: 0.1
+  destructSpeed: 0.05
   flowerMaterials:
   - {fileID: 2100000, guid: 4ce082e5b531542dca56a82195ee69a5, type: 2}
   - {fileID: 2100000, guid: fe173d36e58d57a4abe3ffbee1759018, type: 2}

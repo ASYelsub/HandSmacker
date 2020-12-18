@@ -97,7 +97,7 @@ public class HammerAttack : MonoBehaviour
                     StartCoroutine(cameraShake.Shake(1f * cameraShake.duration, 1f * cameraShake.magnitude));
                 }
 
-                flowerGen.GenFlowers(fireworkTimer);
+                StartCoroutine(flowerGen.SpawnFlower(fireworkTimer));
                 //firework.Emit(1);
                 //int fireworkTimerInt = (int) fireworkTimer;
                 //firework.Emit(fireworkTimerInt);
