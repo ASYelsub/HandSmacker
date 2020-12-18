@@ -10,9 +10,8 @@ public class FlowerGen : MonoBehaviour
     [SerializeField]
     private Material[] flowerMaterials;
 
-    // Update is called once per frame
 
-    public void GenFlower()
+    public void GenFlowers(float amountOfTime)
     {
 
     }

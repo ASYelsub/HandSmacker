@@ -12,6 +12,7 @@ public class HammerAttack : MonoBehaviour
     
     public bool hammerIsAttacking;
     public bool hammerIsGoingUp;
+    private bool nutCollision;
 
     public int score;
     private float timer = 0f;
@@ -22,6 +23,7 @@ public class HammerAttack : MonoBehaviour
     [SerializeField] private NutSpawner nutSpawner;
     [SerializeField] private CameraShake cameraShake;
     [SerializeField] private ScoreNutSpawner scoreNutSpawner;
+    [SerializeField] private FlowerGen flowerGen;
 
     [SerializeField] private float hammerDownTimeLimit;
     [SerializeField] private float hammerUpTimeLimit;
@@ -46,6 +48,7 @@ public class HammerAttack : MonoBehaviour
         hammerIsAttacking = false;
         hammerIsGoingUp = false;
         audioPlaying = false;
+        nutCollision = false;
         hingeObject = gameObject;
         hingeTransform = hingeObject.transform;
         hingeAudioSource = this.GetComponent<AudioSource>();
@@ -85,11 +88,23 @@ public class HammerAttack : MonoBehaviour
                     hingeAudioSource.PlayOneShot(hammerSound[randomInt]);
                     hammerSpark.Emit(30);
                 }
+
+                //Am currently unsure how screen shake should manifest for non-nut hammering.
+                //Don't want to mentally exhaust the player by having them see the screen shake too much.
+                //Also the impact of the nut smash is lessened if there is screen shake all the time.
+                if(!nutCollision)
+                {
+                    StartCoroutine(cameraShake.Shake(1f * cameraShake.duration, 1f * cameraShake.magnitude));
+                }
+
+                flowerGen.GenFlowers(fireworkTimer);
                 //firework.Emit(1);
-                int fireworkTimerInt = (int) fireworkTimer;
-                firework.Emit(fireworkTimerInt);
+                //int fireworkTimerInt = (int) fireworkTimer;
+                //firework.Emit(fireworkTimerInt);
+
                 //scoreMovement.UpdateScoreMultiplier(fireworkTimerInt);
                 fireworkTimer = 0;
+                nutCollision = false;
             }
         }
         if (hammerIsGoingUp)
@@ -112,6 +127,7 @@ public class HammerAttack : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        nutCollision = true;
         nutSpawner.DecreaseNutCount();
         audioPlaying = true;
         score++;
@@ -131,9 +147,9 @@ public class HammerAttack : MonoBehaviour
         Destroy(other.gameObject);
         print(other.gameObject);
         //scoreMovement.UpdateScore(score);
-        if (!cameraShake.corIsRunning)
+        /*if (!cameraShake.corIsRunning)
         {
             StartCoroutine(cameraShake.Shake(cameraShake.duration, cameraShake.magnitude));
-        }
+        }*/
     }
 }

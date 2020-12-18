@@ -5526,6 +5526,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81b8809b82a70c45afb8ec1193910e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flowerPrefab: {fileID: 9044213085718276254, guid: 96bf1a2211945f545ad202e80b83f6a3,
+    type: 3}
+  flowerMaterials:
+  - {fileID: 2100000, guid: 4ce082e5b531542dca56a82195ee69a5, type: 2}
+  - {fileID: 2100000, guid: fe173d36e58d57a4abe3ffbee1759018, type: 2}
+  - {fileID: 2100000, guid: 4a45ee4666075ea498caf667d9afbb2a, type: 2}
 --- !u!1 &1328688385
 GameObject:
   m_ObjectHideFlags: 0
@@ -5662,6 +5668,7 @@ MonoBehaviour:
   nutSpawner: {fileID: 2033030062}
   cameraShake: {fileID: 111258368}
   scoreNutSpawner: {fileID: 303194545}
+  flowerGen: {fileID: 1313531461}
   hammerDownTimeLimit: 0.2
   hammerUpTimeLimit: 0.2
   hammerDownVelocity: {x: 0, y: 8, z: 0}
