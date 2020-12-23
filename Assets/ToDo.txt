@@ -19,7 +19,7 @@ Done:
 -make fireworks look more like fireworks
 -have fireworks have different places it spawns on screen
 
-
+Menu: lerps up from bottom of screen
 
 
 

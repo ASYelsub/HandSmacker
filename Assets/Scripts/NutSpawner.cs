@@ -20,6 +20,9 @@ public class NutSpawner : MonoBehaviour
     [SerializeField]
     private int maxAmountOfNutsOnScreen;
 
+    [SerializeField]
+    private Menu menu;
+
     public int amountOfNutsOnScreen;
     private bool nutsMaxed;
 
@@ -33,34 +36,40 @@ public class NutSpawner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (amountOfNutsOnScreen >= maxAmountOfNutsOnScreen - 1)
+        if(!menu.menuIsMoving && !menu.menuOn)
         {
-            nutsMaxed = true;
-        }
-        if (!nutsMaxed)
-        {
-            timer += Time.deltaTime;
-            if (timer >= 2f)
+            if (amountOfNutsOnScreen >= maxAmountOfNutsOnScreen - 1)
             {
-                float randomizer = UnityEngine.Random.Range(0f, 3f);
-                if (randomizer >= 2f)
+                nutsMaxed = true;
+            }
+            if (!nutsMaxed)
+            {
+                timer += Time.deltaTime;
+                if (timer >= 2f)
                 {
-                    Instantiate(almond, nutSpawner.transform, false);
-                    IncreaseNutCount();
-                }else if (randomizer < 2f && randomizer >= 1f)
-                {
-                    Instantiate(cashew, nutSpawner.transform, false);
-                    IncreaseNutCount();
-                }else
-                {
-                    Instantiate(pecan, nutSpawner.transform, false);
+                    float randomizer = UnityEngine.Random.Range(0f, 3f);
+                    if (randomizer >= 2f)
+                    {
+                        Instantiate(almond, nutSpawner.transform, false);
+                        IncreaseNutCount();
+                    }
+                    else if (randomizer < 2f && randomizer >= 1f)
+                    {
+                        Instantiate(cashew, nutSpawner.transform, false);
+                        IncreaseNutCount();
+                    }
+                    else
+                    {
+                        Instantiate(pecan, nutSpawner.transform, false);
+                    }
+
+                    timer = 0;
                 }
 
-                timer = 0;
             }
-            
+            //        print(nutsMaxed);
         }
-//        print(nutsMaxed);
+
     }
 
     private void IncreaseNutCount()

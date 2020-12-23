@@ -12,26 +12,32 @@ public class NutMovement : MonoBehaviour
     private Vector3 nutLimit; //this is how far on the screen the nut can go before it despawns
 
     private NutSpawner nutSpawner;
+    private Menu menu;
 
     private void Start()
     {
         thisNut = gameObject;
         nutSpawner = FindObjectOfType<NutSpawner>();
+        menu = FindObjectOfType<Menu>();
     }
 
     private void FixedUpdate()
     {
-        if (thisNut.transform.localPosition.x <= nutLimit.x)
+        if(!menu.menuOn && !menu.menuIsMoving)
         {
-            //print("we are destroying");
-            nutSpawner.DecreaseNutCount();
-            Destroy(thisNut);
-            
+            if (thisNut.transform.localPosition.x <= nutLimit.x)
+            {
+                //print("we are destroying");
+                nutSpawner.DecreaseNutCount();
+                Destroy(thisNut);
+
+            }
+            else
+            {
+                //print(thisNut.transform.localPosition);
+                thisNut.transform.localPosition = thisNut.transform.localPosition + nutVector;
+            }
         }
-        else
-        {
-            //print(thisNut.transform.localPosition);
-            thisNut.transform.localPosition = thisNut.transform.localPosition + nutVector;
-        }
+       
     }
 }

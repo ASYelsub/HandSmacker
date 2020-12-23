@@ -14,6 +14,8 @@ public class HammerMovement : MonoBehaviour
     [Header("Other Scripts")]
     [SerializeField]
     private HammerAttack hammerAttack;
+    [SerializeField]
+    private Menu menu;
     [Header("Adjustments")]
     [SerializeField]
     private float xMax;
@@ -42,31 +44,35 @@ public class HammerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (goingRight)
+        if(!menu.menuOn && !menu.menuIsMoving)
         {
-            if (hingeTransform.position.x >= xMax)
+            if (goingRight)
             {
-                goingRight = !goingRight;
-                RandomizeMovementSpeed();
+                if (hingeTransform.position.x >= xMax)
+                {
+                    goingRight = !goingRight;
+                    RandomizeMovementSpeed();
+                }
+                else if (hingeTransform.position.x < xMax)
+                {
+                    movementVector = new Vector3(movementSpeed, 0, 0);
+                }
             }
-            else if (hingeTransform.position.x < xMax)
+            if (!goingRight)
             {
-                movementVector = new Vector3(movementSpeed,0,0);
+                if (hingeTransform.position.x <= xMin)
+                {
+                    RandomizeMovementSpeed();
+                    goingRight = !goingRight;
+                }
+                else if (hingeTransform.position.x > xMin)
+                {
+                    movementVector = new Vector3(-movementSpeed, 0, 0);
+                }
             }
+            hingeObject.transform.position = hingeObject.transform.position + movementVector;
         }
-        if (!goingRight)
-        {
-            if (hingeTransform.position.x <= xMin)
-            {
-                RandomizeMovementSpeed();
-                goingRight = !goingRight;
-            }
-            else if (hingeTransform.position.x > xMin)
-            {
-                movementVector = new Vector3(-movementSpeed,0,0);
-            }
-        }
-        hingeObject.transform.position = hingeObject.transform.position + movementVector;
+       
     }
 
     private void RandomizeMovementSpeed()

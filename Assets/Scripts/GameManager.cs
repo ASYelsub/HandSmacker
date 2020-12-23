@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public Menu menu;
     private float timer = 0;
     void Update()
     {

@@ -6,6 +6,8 @@ using UnityEngine;
 public class ConveyerSpawner : MonoBehaviour
 {
     [SerializeField]
+    private Menu menu;
+    [SerializeField]
     private GameObject conveyerPrefab;
     [SerializeField]
     private Vector3 initialLocation;

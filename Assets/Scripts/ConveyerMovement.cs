@@ -5,25 +5,29 @@ using UnityEngine;
 
 public class ConveyerMovement : MonoBehaviour
 {
+    private Menu menu;
     private ConveyerSpawner conveyerSpawner;
     [SerializeField]
     private Vector3 conveyerMoveVector;
     void Start()
     {
         conveyerSpawner = FindObjectOfType<ConveyerSpawner>();
+        menu = FindObjectOfType<Menu>();
     }
 
     private void FixedUpdate()
     {
-        
-        if (this.transform.position.x <= conveyerSpawner.despawnPos.x)
+        if(!menu.menuIsMoving && !menu.menuOn)
         {
-            conveyerSpawner.SpawnNextConveyer();
-            Destroy(gameObject);
-        }
-        else
-        {
-            gameObject.transform.localPosition = gameObject.transform.localPosition + conveyerMoveVector;
+            if (this.transform.position.x <= conveyerSpawner.despawnPos.x)
+            {
+                conveyerSpawner.SpawnNextConveyer();
+                Destroy(gameObject);
+            }
+            else
+            {
+                gameObject.transform.localPosition = gameObject.transform.localPosition + conveyerMoveVector;
+            }
         }
     }
 }

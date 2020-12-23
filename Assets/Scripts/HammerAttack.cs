@@ -24,6 +24,7 @@ public class HammerAttack : MonoBehaviour
     [SerializeField] private CameraShake cameraShake;
     [SerializeField] private ScoreNutSpawner scoreNutSpawner;
     [SerializeField] private FlowerGen flowerGen;
+    [SerializeField] private Menu menu;
 
     [SerializeField] private float hammerDownTimeLimit;
     [SerializeField] private float hammerUpTimeLimit;
@@ -66,73 +67,80 @@ public class HammerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+        if(!menu.menuOn && !menu.menuIsMoving)
         {
-            if (!hammerIsAttacking && !hammerIsGoingUp)
+            if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
             {
-                hammerIsAttacking = true;   
+                if (!hammerIsAttacking && !hammerIsGoingUp)
+                {
+                    hammerIsAttacking = true;
+                }
             }
         }
+        
     }
 
     private void FixedUpdate()
     {
+        if(!menu.menuOn && !menu.menuIsMoving)
+        {
+            fireworkTimer += Time.deltaTime;
 
-        fireworkTimer += Time.deltaTime;
+            if (hammerIsAttacking)
+            {
+                if (timer < hammerDownTimeLimit)
+                {
+                    timer += Time.deltaTime;
+                    hingeTransform.Rotate(hammerDownVelocity);
+                }
+                else
+                {
+                    hammerIsAttacking = false;
+                    timer = 0;
+                    hammerIsGoingUp = true;
+                    if (!audioPlaying)
+                    {
+                        int randomInt = UnityEngine.Random.Range(0, hammerSound.Length);
+                        hingeAudioSource.PlayOneShot(hammerSound[randomInt]);
+                        hammerSpark.Emit(30);
+                    }
+
+                    //Am currently unsure how screen shake should manifest for non-nut hammering.
+                    //Don't want to mentally exhaust the player by having them see the screen shake too much.
+                    //Also the impact of the nut smash is lessened if there is screen shake all the time.
+                    if (!nutCollision)
+                    {
+                        StartCoroutine(cameraShake.Shake(1f * cameraShake.duration, 1f * cameraShake.magnitude));
+                    }
+                    /*
+                    if (!flowerGen.enumRunning) {
+                        StartCoroutine(flowerGen.SpawnFlower(fireworkTimer));
+                    }*/
+                    StartCoroutine(SpawnFirework(fireworkTimer * 6));
+
+
+                    //scoreMovement.UpdateScoreMultiplier(fireworkTimerInt);
+                    fireworkTimer = 0;
+                    nutCollision = false;
+                }
+            }
+            if (hammerIsGoingUp)
+            {
+                if (timer < hammerUpTimeLimit)
+                {
+                    timer += Time.deltaTime;
+                    hingeTransform.Rotate(hammerUpVelocity);
+                }
+                else
+                {
+                    hammerIsAttacking = false;
+                    timer = 0;
+                    hammerIsGoingUp = false;
+                    audioPlaying = false;
+                }
+            }
+        }
         
-        if (hammerIsAttacking)
-        {
-            if (timer < hammerDownTimeLimit)
-            {
-                timer += Time.deltaTime;
-                hingeTransform.Rotate(hammerDownVelocity);
-            }
-            else
-            {
-                hammerIsAttacking = false;
-                timer = 0;
-                hammerIsGoingUp = true;
-                if (!audioPlaying)
-                {
-                    int randomInt = UnityEngine.Random.Range(0,hammerSound.Length);
-                    hingeAudioSource.PlayOneShot(hammerSound[randomInt]);
-                    hammerSpark.Emit(30);
-                }
-
-                //Am currently unsure how screen shake should manifest for non-nut hammering.
-                //Don't want to mentally exhaust the player by having them see the screen shake too much.
-                //Also the impact of the nut smash is lessened if there is screen shake all the time.
-                if(!nutCollision)
-                {
-                    StartCoroutine(cameraShake.Shake(1f * cameraShake.duration, 1f * cameraShake.magnitude));
-                }
-                /*
-                if (!flowerGen.enumRunning) {
-                    StartCoroutine(flowerGen.SpawnFlower(fireworkTimer));
-                }*/
-                StartCoroutine(SpawnFirework(fireworkTimer * 6));
-                
-
-                //scoreMovement.UpdateScoreMultiplier(fireworkTimerInt);
-                fireworkTimer = 0;
-                nutCollision = false;
-            }
-        }
-        if (hammerIsGoingUp)
-        {
-            if (timer < hammerUpTimeLimit)
-            {
-                timer += Time.deltaTime;
-                hingeTransform.Rotate(hammerUpVelocity);
-            }
-            else
-            {
-                hammerIsAttacking = false;
-                timer = 0;
-                hammerIsGoingUp = false;
-                audioPlaying = false;
-            }
-        }
     }
     private IEnumerator SpawnFirework(float fireworkTimer)
     {
