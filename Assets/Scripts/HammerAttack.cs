@@ -38,14 +38,23 @@ public class HammerAttack : MonoBehaviour
     [SerializeField] private ParticleSystem hammerSpark;
     [SerializeField] private ParticleSystem firework;
 
+    [SerializeField] private ParticleSystem[] fireworks;
+
     [SerializeField]
     private GameObject flowerHolder;
+
+    private Color[] fireworkColors = new Color[5];
 
     public float fireworkTimer = 0;
 
     private bool audioPlaying;
 
     private void Start(){
+        fireworkColors[0] = new Vector4(160,33,209,255);
+        fireworkColors[1] = new Vector4(0,250,255,255);
+        fireworkColors[2] = new Vector4(255,0,47,255);
+        fireworkColors[3] = new Vector4(0, 26, 255, 255);
+        fireworkColors[4] = new Vector4(195,195,88,255);
         hammerIsAttacking = false;
         hammerIsGoingUp = false;
         audioPlaying = false;
@@ -100,10 +109,9 @@ public class HammerAttack : MonoBehaviour
                 /*
                 if (!flowerGen.enumRunning) {
                     StartCoroutine(flowerGen.SpawnFlower(fireworkTimer));
-                }*/ 
-      
-                int fireworkTimerInt = (int) fireworkTimer;
-                firework.Emit(fireworkTimerInt);
+                }*/
+                StartCoroutine(SpawnFirework(fireworkTimer * 6));
+                
 
                 //scoreMovement.UpdateScoreMultiplier(fireworkTimerInt);
                 fireworkTimer = 0;
@@ -125,6 +133,21 @@ public class HammerAttack : MonoBehaviour
                 audioPlaying = false;
             }
         }
+    }
+    private IEnumerator SpawnFirework(float fireworkTimer)
+    {
+        yield return new WaitForSeconds(.2f);
+        int fireworkTimerInt = (int)fireworkTimer;
+
+        
+        
+        int randomInt = UnityEngine.Random.Range(0, fireworks.Length);
+        int randomColor = UnityEngine.Random.Range(0, fireworkColors.Length);
+
+        var main = fireworks[randomInt].main;
+        main.startColor = fireworkColors[randomColor];
+        fireworks[randomInt].Emit(fireworkTimerInt);
+        yield return null;
     }
 
     private void OnCollisionEnter(Collision other)
