@@ -38,6 +38,8 @@ public class FlowerGen : MonoBehaviour
     bool xDecreased = false;
     bool xIncreased = false;
 
+    public bool enumRunning;
+
     private void Start()
     {
         flowerPetals = new List<GameObject>();
@@ -46,10 +48,12 @@ public class FlowerGen : MonoBehaviour
         petalX = 0f;
         petalY = 0f;
         petalZ = 0f;
+        enumRunning = false;
     }
 
     public IEnumerator SpawnFlower(float amountOfTime)
     {
+        enumRunning = true;
 
         /*Pseudocode for algorithm
          * FIRST FIVE PETALS
@@ -68,12 +72,14 @@ public class FlowerGen : MonoBehaviour
          */
 
         int spawnCount = (int)(amountOfTime * flowerExpand);
+        yDecreased = false;
+        yIncreased = false;
+        xDecreased = false;
+        xIncreased = false;
 
-        
-
+        petalPos = new Vector3(petalX, petalY, petalZ);
         for (int i = 0; i < 5; i++)
         {
-
             if (i != 0 && i < 5)
             {
                 petalPos = firstFourAfter0Logic(i);
@@ -104,7 +110,8 @@ public class FlowerGen : MonoBehaviour
             yield return new WaitForSeconds(destructSpeed);
         }
         flowerPetals.Clear();
-       
+
+        enumRunning = false;
         yield return null;
     }
 
@@ -117,7 +124,7 @@ public class FlowerGen : MonoBehaviour
         {
             petalX = petalX - spacer;
         }
-        xIncreased = true;
+        xDecreased = true;
         return true;
     }
     private bool decreaseY(bool stateofBool)
@@ -135,7 +142,7 @@ public class FlowerGen : MonoBehaviour
         {
             petalX = petalX + spacer;
         }
-        xDecreased = true;
+        xIncreased = true;
         return true;
     }
     private bool increaseY(bool stateofBool)
@@ -158,15 +165,19 @@ public class FlowerGen : MonoBehaviour
             {
                 case 0:
                     increaseX(false);
+                    Debug.Log("Right first");
                     break;
                 case 1:
                     increaseY(false);
+                    Debug.Log("Up first");
                     break;
                 case 2:
                     decreaseX(false);
+                    Debug.Log("Left first");
                     break;
                 case 3:
                     decreaseY(false);
+                    Debug.Log("Down first");
                     break;
             }
             petalPos = new Vector3(petalX, petalY, petalZ);
@@ -176,38 +187,42 @@ public class FlowerGen : MonoBehaviour
             int randomMove = UnityEngine.Random.Range(0, 3);
             if (xIncreased)
             {
+                //Debug.Log("After right first");
                 switch (randomMove)
                 {
-                    case 0: increaseY(false); break;
-                    case 1: decreaseX(false); break;
-                    case 2: decreaseY(false); break;
+                    case 0: increaseY(false); Debug.Log("Up second"); break;
+                    case 1: decreaseX(false); Debug.Log("Left second"); break;
+                    case 2: decreaseY(false); Debug.Log("Down second"); break;
                 }
             }
             else if (yIncreased)
             {
+               // Debug.Log("After up first");
                 switch (randomMove)
                 {
-                    case 0: increaseX(false); break;
-                    case 1: decreaseX(false); break;
-                    case 2: decreaseY(false); break;
+                    case 0: increaseX(false); Debug.Log("Right second"); break;
+                    case 1: decreaseX(false); Debug.Log("Left second"); break;
+                    case 2: decreaseY(false); Debug.Log("Down second"); break;
                 }
             }
             else if (xDecreased)
             {
+               // Debug.Log("After left first");
                 switch (randomMove)
                 {
-                    case 0: increaseY(false); break;
-                    case 1: increaseX(false); break;
-                    case 2: decreaseY(false); break;
+                    case 0: increaseY(false); Debug.Log("Up second"); break;
+                    case 1: increaseX(false); Debug.Log("Right second"); break;
+                    case 2: decreaseY(false); Debug.Log("Down second"); break;
                 }
             }
             else if (yDecreased)
             {
+               // Debug.Log("After down first");
                 switch (randomMove)
                 {
-                    case 0: decreaseX(false); break;
-                    case 1: increaseX(false); break;
-                    case 2: increaseY(false); break;
+                    case 0: decreaseX(false); Debug.Log("Left second"); break;
+                    case 1: increaseX(false); Debug.Log("Right second"); break;
+                    case 2: increaseY(false); Debug.Log("Up second"); break;
                 }
             }
 
@@ -222,57 +237,61 @@ public class FlowerGen : MonoBehaviour
             {
                 switch (randomMove)
                 {
-                    case 0: increaseX(false); break;
-                    case 1: increaseY(false); break;
+                    case 0: increaseX(false); Debug.Log("Right third"); break;
+                    case 1: increaseY(false); Debug.Log("Up third"); break;
                 }
             }
             else if (xDecreased && xIncreased)
             {
                 switch (randomMove)
                 {
-                    case 0: increaseY(false); break;
-                    case 1: decreaseY(false); break;
+                    case 0: increaseY(false); Debug.Log("Up third"); break;
+                    case 1: decreaseY(false); Debug.Log("Down third"); break;
                 }
             }
             else if (xDecreased && yIncreased)
             {
                 switch (randomMove)
                 {
-                    case 0: increaseX(false); break;
-                    case 1: decreaseY(false); break;
+                    case 0: increaseX(false); Debug.Log("Right third"); break;
+                    case 1: decreaseY(false); Debug.Log("Down third"); break;
                 }
             }
             else if (yDecreased && xIncreased)
             {
                 switch (randomMove)
                 {
-                    case 0: increaseY(false); break;
-                    case 1: decreaseX(false); break;
+                    case 0: increaseY(false); Debug.Log("Up third"); break;
+                    case 1: decreaseX(false); Debug.Log("Left third"); break;
                 }
             }
             else if (yDecreased && yIncreased)
             {
                 switch (randomMove)
                 {
-                    case 0: increaseY(false); break;
-                    case 1: decreaseX(false); break;
+                    case 0: increaseX(false); Debug.Log("Right third"); break;
+                    case 1: decreaseX(false); Debug.Log("Left third"); break;
                 }
             }
             else if (xIncreased && yIncreased)
             {
                 switch (randomMove)
                 {
-                    case 0: decreaseX(false); break;
-                    case 1: decreaseY(false); break;
+                    case 0: decreaseX(false); Debug.Log("Left third"); break;
+                    case 1: decreaseY(false); Debug.Log("Down third"); break;
                 }
             }
             petalPos = new Vector3(petalX, petalY, petalZ);
         }
         else if (currentNum == 4)
         {
-            Debug.Log("hi");
+            if(xIncreased && yIncreased && yDecreased) { decreaseX(false); }
+            else if(xIncreased && xDecreased && yDecreased) { increaseY(false); }
+            else if(xIncreased && yIncreased && xDecreased) { decreaseY(false); }
+            else if (yIncreased && yDecreased && xDecreased) { increaseX(false); }
+            petalPos = new Vector3(petalX, petalY, petalZ);
         }
-        Debug.Log(petalPos.ToString());
+        //Debug.Log(petalPos.ToString());
         return petalPos;
     }
 

@@ -44,6 +44,7 @@ public class HammerAttack : MonoBehaviour
     public float fireworkTimer = 0;
 
     private bool audioPlaying;
+
     private void Start(){
         hammerIsAttacking = false;
         hammerIsGoingUp = false;
@@ -96,11 +97,13 @@ public class HammerAttack : MonoBehaviour
                 {
                     StartCoroutine(cameraShake.Shake(1f * cameraShake.duration, 1f * cameraShake.magnitude));
                 }
-
-                StartCoroutine(flowerGen.SpawnFlower(fireworkTimer));
-                //firework.Emit(1);
-                //int fireworkTimerInt = (int) fireworkTimer;
-                //firework.Emit(fireworkTimerInt);
+                /*
+                if (!flowerGen.enumRunning) {
+                    StartCoroutine(flowerGen.SpawnFlower(fireworkTimer));
+                }*/ 
+      
+                int fireworkTimerInt = (int) fireworkTimer;
+                firework.Emit(fireworkTimerInt);
 
                 //scoreMovement.UpdateScoreMultiplier(fireworkTimerInt);
                 fireworkTimer = 0;
@@ -122,7 +125,6 @@ public class HammerAttack : MonoBehaviour
                 audioPlaying = false;
             }
         }
-
     }
 
     private void OnCollisionEnter(Collision other)
