@@ -116,7 +116,7 @@ public class HammerAttack : MonoBehaviour
                     if (!flowerGen.enumRunning) {
                         StartCoroutine(flowerGen.SpawnFlower(fireworkTimer));
                     }*/
-                    StartCoroutine(SpawnFirework(fireworkTimer * 6));
+                    StartCoroutine(SpawnFirework(fireworkTimer * 5));
 
 
                     //scoreMovement.UpdateScoreMultiplier(fireworkTimerInt);

@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nutVector: {x: -0.02, y: 0, z: 0}
-  nutLimit: {x: -5.4, y: 0, z: 0}
+  nutLimit: {x: -8, y: 0, z: 0}
 --- !u!65 &-5183589758842557790
 BoxCollider:
   m_ObjectHideFlags: 0
