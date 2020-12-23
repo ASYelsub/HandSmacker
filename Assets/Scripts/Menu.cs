@@ -10,11 +10,21 @@ public class Menu : MonoBehaviour
     [HideInInspector]public bool menuIsMoving;
     Vector3 menuOnPos;
     Vector3 menuOffPos;
+     
+    //Raycast stuff
+    Vector2 mousePos;
+    [SerializeField]private Camera cam;
+    [SerializeField] private GameObject closeMenuButton;
+    bool shootRay;
+    public Ray buttonRay;
+    Vector3 point;
+    Vector3 worldPos;
     void Start()
     {
-        menuOnPos = new Vector3(0f, -0.047f, 0.69166f);
+        shootRay = false;
+        menuOnPos = new Vector3(0, -0.06700065f, 0.60448f);
         //scale of 0.126693,0.126693,0.08172395
-        menuOffPos = new Vector3(0f, -0.84f, 0.69166f);
+        menuOffPos = new Vector3(0f, -0.754f, 0.60448f);
         menuOn = false;
         menuIsMoving = false;
         menuTransform = gameObject.GetComponent<Transform>();
@@ -40,7 +50,7 @@ public class Menu : MonoBehaviour
         {
             menuTransform.localPosition = Vector3.Lerp(menuOffPos, menuOnPos, timer);
             timer = timer + .01f;
-            Debug.Log(timer);
+            //Debug.Log(timer);
             yield return null;
         }
         menuIsMoving = false;
@@ -64,15 +74,49 @@ public class Menu : MonoBehaviour
 
     void Update()
     {
+        MouseInputs();
         if (Input.GetKeyDown(KeyCode.Escape) && !menuIsMoving)
         {
             TurnMenuOnOff(menuOn);
             menuIsMoving = true;
         }
+        if(shootRay)
+        {
+            ButtonRay();
+        }
+  
     }
 
-    private void FixedUpdate()
+    void MouseInputs()
     {
-        
+        mousePos = (new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+        point = mousePos;
+        point.z = cam.nearClipPlane;
+        worldPos = cam.ScreenToWorldPoint(point);
+
+        if (Input.GetMouseButtonDown(0) && !menuIsMoving && menuOn)
+        {
+            //Debug.Log("Mouse Clicked");
+            shootRay = true;
+        }
+    }
+
+    void ButtonRay()
+    {
+        Debug.Log(worldPos.x + " " + worldPos.y);
+        buttonRay = new Ray(new Vector3(worldPos.x, worldPos.y, cam.transform.position.z), Vector3.forward);
+        //Debug.Log("Ray sent out");
+        RaycastHit hit;
+        if (Physics.Raycast(buttonRay, out hit, 10f))
+        {
+            //Debug.DrawRay(buttonRay.origin, buttonRay.direction, Color.magenta);
+            Debug.Log("Ray hit " + hit.collider.gameObject);
+            if (hit.collider.tag == "Exit")
+            {
+                TurnMenuOnOff(menuOn);
+                menuIsMoving = true;
+            }
+        }
+        shootRay = false;
     }
 }
