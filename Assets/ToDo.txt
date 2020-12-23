@@ -1,0 +1,10 @@
+Todo:
+-make fireworks look more like fireworks
+-refactor nut score code in nested for-loop with giant object pool in the beginning, score counted by turning on/off different mesh renderers,
+
+-redo start screen
+-make credits screen
+
+
+-playtest different kinds of camera shake on tigsource
+-later: implement robert's procgen concept with procgen zelda pattern
