@@ -5129,7 +5129,7 @@ GameObject:
   - component: {fileID: 303194546}
   - component: {fileID: 303194545}
   m_Layer: 0
-  m_Name: NutSpawner2
+  m_Name: ScoreNutSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5157,6 +5157,17 @@ MonoBehaviour:
   - {fileID: 804036357251733160, guid: b2e16b4f18cc346d39799b1510401429, type: 3}
   initialPos: {x: -6, y: 5.2, z: -2.85}
   initialRot: {x: 0, y: -90, z: 90}
+  nutScoreObject: {fileID: 1312435688716178506, guid: 7e01e699ce0e2485bbd940567e79d8f2,
+    type: 3}
+  cam: {fileID: 111258365}
+  xNutAmount: 11
+  yNutAmount: 8
+  spaceAmount: 400
+  nutX: 6.5
+  nutY: 5
+  spaceX: 1.3
+  spaceY: 0.78
+  spacer: 10
 --- !u!4 &303194546
 Transform:
   m_ObjectHideFlags: 0
@@ -5421,7 +5432,7 @@ PrefabInstance:
     - target: {fileID: -1504981713932161579, guid: c676f92b13369497dbda4028add4f434,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: c676f92b13369497dbda4028add4f434,
         type: 3}

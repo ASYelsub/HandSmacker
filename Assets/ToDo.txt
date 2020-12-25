@@ -1,6 +1,9 @@
+Currently:
+-refactor nut score code in nested for-loop with giant object pool in the beginning, score counted by turning on/off different mesh renderers,
+
+
 Todo:
 -fix spawn in time for nuts and conveyers
--refactor nut score code in nested for-loop with giant object pool in the beginning, score counted by turning on/off different mesh renderers,
 -menu buttons
 -nut breaking effect
 
