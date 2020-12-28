@@ -8,6 +8,7 @@ TagManager:
   - cashew
   - pecan
   - Exit
+  - Enter
   layers:
   - Default
   - TransparentFX

@@ -5,11 +5,16 @@ using UnityEngine;
 public class Menu : MonoBehaviour
 {
     Transform menuTransform;
-    
+
+    [SerializeField]
+    private Transform enterTransform;
+
     [HideInInspector]public bool menuOn;
     [HideInInspector]public bool menuIsMoving;
     Vector3 menuOnPos;
     Vector3 menuOffPos;
+    Vector3 enterPos;
+    Vector3 enterHiddenPos;
      
     //Raycast stuff
     Vector2 mousePos;
@@ -21,6 +26,8 @@ public class Menu : MonoBehaviour
     Vector3 worldPos;
     void Start()
     {
+        enterPos = new Vector3(0.6376439f, -0.3511f, 0.5639391f);
+        enterHiddenPos = new Vector3(0.6809f,-0.3511f, 0.5639391f);
         shootRay = false;
         menuOnPos = new Vector3(0, -0.06700065f, 0.60448f);
         //scale of 0.126693,0.126693,0.08172395
@@ -35,19 +42,22 @@ public class Menu : MonoBehaviour
     {
         if (!currentMenuState)
         {
-            StartCoroutine(MoveMenuUp());         
+            StartCoroutine(MoveMenuUp());
         }
         else if (currentMenuState)
         {
             StartCoroutine(MoveMenuDown());
+
         }
     }
+
 
     private IEnumerator MoveMenuUp()
     {
         float timer = 0;
         while (timer < 1)
         {
+            enterTransform.localPosition = Vector3.Lerp(enterPos, enterHiddenPos, timer);
             menuTransform.localPosition = Vector3.Lerp(menuOffPos, menuOnPos, timer);
             timer = timer + .01f;
             //Debug.Log(timer);
@@ -63,6 +73,7 @@ public class Menu : MonoBehaviour
         float timer = 0;
         while (timer < 1)
         {
+            enterTransform.localPosition = Vector3.Lerp(enterHiddenPos, enterPos, timer);
             menuTransform.localPosition = Vector3.Lerp(menuOnPos, menuOffPos, timer);
             timer = timer + .01f;
             yield return null;
@@ -94,10 +105,14 @@ public class Menu : MonoBehaviour
         point.z = cam.nearClipPlane;
         worldPos = cam.ScreenToWorldPoint(point);
 
-        if (Input.GetMouseButtonDown(0) && !menuIsMoving && menuOn)
+        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
-            //Debug.Log("Mouse Clicked");
-            shootRay = true;
+            if (!menuIsMoving)
+            {
+                //Debug.Log("Mouse Clicked");
+                shootRay = true;
+            }
+            
         }
     }
 
@@ -112,6 +127,11 @@ public class Menu : MonoBehaviour
             //Debug.DrawRay(buttonRay.origin, buttonRay.direction, Color.magenta);
             Debug.Log("Ray hit " + hit.collider.gameObject);
             if (hit.collider.tag == "Exit")
+            {
+                TurnMenuOnOff(menuOn);
+                menuIsMoving = true;
+            }
+            if(hit.collider.tag == "Enter")
             {
                 TurnMenuOnOff(menuOn);
                 menuIsMoving = true;

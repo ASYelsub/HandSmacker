@@ -7,33 +7,29 @@ using UnityEngine.SceneManagement;
 public class ScoreNutSpawner : MonoBehaviour
 {
     /*Pseudocode:
-     * First, we are going to "show" 72 nuts 3 times. this is the outer for-loop, for the 
-     * first three numbers the nuts are going to be in a 9x8 square on screen
-     * above the conveyer belt.
-     * 
-     * To do this, we are going to need to get the screen height and width.
-     * The score nuts are most affected by changing aspect ratio out of all things in the game.
-     * 
-     * Things that change depending on aspect ratio:
-     * -starting position of nut at the top most left point on the screen
-     * -the amount of space both in x and y directions of nuts after starting nut
-     * 
-     * 
-     * if the screen is wider, the starting position should be more negative in the x
-     * if the screen is narrower, the starting position should be closer to zero in the x
-     * 
-     * do not need to worry about the starting point of the y.
+     * round - sideBuff - topbottombuff- pos
+    1 - 2 - 1 - 0.03,0.4,-0.4
+    2 - 5 - 2 - 0.03,0.59,1.34
+    3 - 6 - 3 - 0.03,0.88,3
+    4 - 10 - 4 - 0.03,1.16,5.4
+    5 - 12 - 5 - 0.08,1.34,7.19
+    6 - 14 - 6 - 0.08,1.61,8.76
+    7 - 16 - 7 - -0.15,1.82,10.6
+    8 - 18 - 8 - -0.62,2.2,12.69
+    9 - 20 - 9 - -0.62,2.38,14.49
+    10 - NA - 10 - -0.62,2.83,16.46
+    11 - NA - 11 - 1.2,3.44,18.08
+    12 - NA - NA - 1.73,4.18,21.32
+     * Round 0:
+     * Just spawn as a square or whatever
+     * at the end of turning 0 on, move out to "round 1"
+     * Round 1:
      */
 
-
-
-
-
-
-
-
-
-    private float tempNutNum;
+    private Vector3[] roundPositions = new Vector3[13];
+    private int amountAddedToSides;
+    private int amountAddedToTopAndBottom;
+    
 
 
     [SerializeField]
@@ -45,16 +41,9 @@ public class ScoreNutSpawner : MonoBehaviour
 
     [SerializeField]private Vector3 initialPos;
     [SerializeField]private Vector3 initialRot;
-    private Vector3 currentPos;
 
-    private int nutAmountLength = 15;
-    private int nutAmountHeight;
 
     private int nutCount;
-
-    private float widthSpacing;
-    private float heightSpacing;
-    private int currentNutHeight;
 
     private float screenWidth;
     private float screenHeight;
@@ -75,8 +64,8 @@ public class ScoreNutSpawner : MonoBehaviour
 
     //Most of these are for specifically 16x9
     [Header("Tuning Variables")]
-    [SerializeField] private float xNutAmount;
-    [SerializeField] private float yNutAmount;
+    [SerializeField] private float xNutAmountSquare;
+    [SerializeField] private float yNutAmountSquare;
     [SerializeField] private float spaceAmount; //for the screenspecfic one
     [SerializeField] private float nutX;
     [SerializeField] private float nutY;
@@ -93,11 +82,24 @@ public class ScoreNutSpawner : MonoBehaviour
     
     private void Start()
     {
+        roundPositions[0] = new Vector3(gameObject.GetComponent<Transform>().position.x,gameObject.GetComponent<Transform>().position.y,gameObject.GetComponent<Transform>().position.z);
+        roundPositions[1] = new Vector3(0.03f,0.4f,-0.4f);
+        roundPositions[2] = new Vector3(0.03f,0.59f,1.34f);
+        roundPositions[3] = new Vector3(0.03f,0.88f,3f);
+        roundPositions[4] = new Vector3(0.03f,1.16f,5.4f);
+        roundPositions[5] = new Vector3(0.08f,1.34f,7.19f);
+        roundPositions[6] = new Vector3(0.08f,1.61f,8.76f);
+        roundPositions[7] = new Vector3(-0.15f,1.82f,10.6f);
+        roundPositions[8] = new Vector3(-0.62f,2.2f,12.69f);
+        roundPositions[9] = new Vector3(-0.62f,2.38f,14.49f);
+        roundPositions[10] = new Vector3(-0.62f,2.83f,16.46f);
+        roundPositions[11] = new Vector3(1.2f,3.44f,18.08f);
+        roundPositions[12] = new Vector3(1.73f,4.18f,21.32f);
 
-        nutZ = -3f;
+        nutZ = 0f;
 
-        initialYNutAmount = yNutAmount;
-        initialXNutAmount = xNutAmount;
+        initialYNutAmount = yNutAmountSquare;
+        initialXNutAmount = xNutAmountSquare;
         initialNutX = nutX;
         initialNutY = nutY;
         initialNutZ = nutZ;
@@ -107,13 +109,13 @@ public class ScoreNutSpawner : MonoBehaviour
 
         heightRatio = (screenHeight / screenWidth);
         widthRatio = (screenWidth / screenHeight);
-        Debug.Log(" widthRatio: " + widthRatio + " heightRatio: " + heightRatio + " screenWidth: " + screenWidth + " screenHeight: " + screenHeight);
+        //Debug.Log(" widthRatio: " + widthRatio + " heightRatio: " + heightRatio + " screenWidth: " + screenWidth + " screenHeight: " + screenHeight);
         nutCount = 0;
       
 
 
-        nutSpacerWidth = (screenWidth / (xNutAmount * spaceAmount)) * widthRatio;
-        nutSpacerHeight = (screenHeight / (yNutAmount * spaceAmount) * widthRatio);
+        nutSpacerWidth = (screenWidth / (xNutAmountSquare * spaceAmount)) * widthRatio;
+        nutSpacerHeight = (screenHeight / (yNutAmountSquare * spaceAmount) * widthRatio);
 
         //I THINK this is correct??? for aspect ratio stuff
         //nutStartX = widthRatio * nutX;
@@ -125,256 +127,40 @@ public class ScoreNutSpawner : MonoBehaviour
     void NutPool()
     {
 
-        //Three nuts on main screen
-        for(int q = 0; q < 3; q++)
-        {
-            if(q == 1)
-            {
-                yNutAmount = initialYNutAmount;
-                xNutAmount = initialXNutAmount;
-                nutZ = initialNutZ + .1f;
-                nutX = initialNutX + spaceX / 2;
-                nutY = initialNutY + spaceY / 2;
-            }
-            else if (q == 2)
-            {
-                yNutAmount = initialYNutAmount;
-                xNutAmount = initialXNutAmount;
-                nutZ = initialNutZ - .1f;
-                nutX = initialNutX + spaceX / 2 - .4f;
-                nutY = initialNutY + spaceY / 2 - .2f;
-            }
-            else
-            {
-                yNutAmount = initialYNutAmount;
-                xNutAmount = initialXNutAmount;
-            }
-            for (int i = 0; i < yNutAmount; i++)
-            {
-                for (int j = 0; j < xNutAmount; j++)
-                {
-                    SpawnNut(i, j);
-                }
-            }
-            
-        }
-        //First layer above main square
-        for(int q = 0; q < 3; q++)
-        {
-            if (q == 1)
-            {
-                nutZ = initialNutZ + .1f;
-                nutX = initialNutX + spaceX + (spaceX / 2);
-                nutY = initialNutY + spaceY + (spaceY / 2);
-            }
-            else if (q == 2)
-            {
-                nutZ = initialNutZ - .1f;
-                nutX = initialNutX + spaceX + (spaceX / 2) - .4f;
-                nutY = initialNutY + spaceY + (spaceY / 2) - .2f;
-            }
-            else
-            {
-                nutX = initialNutX + (spaceX);
-                nutY = initialNutY + (spaceY);
-            }
-            for (int i = 0; i < 1; i++)
-            {
-                for (int j = 0; j < xNutAmount; j++)
-                {
-                    //Debug.Log("THIS HAPPENED");
-                    SpawnNut(i, j);              
-                }
-            }
-        }
+        yNutAmountSquare = initialYNutAmount;
+        xNutAmountSquare = initialXNutAmount;
 
-        //First layer below main square
-        for (int q = 0; q < 3; q++)
-        {
-            if (q == 1)
-            {
-                nutZ = initialNutZ + .1f;
-                nutX = initialNutX - spaceX + (spaceX / 2);
-                nutY = initialNutY - initialYNutAmount*spaceY + (spaceY / 2);
-            }
-            else if (q == 2)
-            {
-                nutZ = initialNutZ - .1f;
-                nutX = initialNutX - spaceX + (spaceX / 2) - .4f;
-                nutY = initialNutY - initialYNutAmount*spaceY + (spaceY / 2) - .2f;
-            }
-            else
-            {
-                nutX = initialNutX - (spaceX);
-                nutY = initialNutY - initialYNutAmount*(spaceY);
-            }
-            for (int i = 0; i < 1; i++)
-            {
-                for (int j = 0; j < xNutAmount; j++)
-                {
-                    //Debug.Log("THIS HAPPENED");
-                    SpawnNut(i, j);
-                }
-            }
-        }
 
-        //Second layer above main square
-        for (int q = 0; q < 3; q++)
+        //Round 0
+        for (int i = 0; i < yNutAmountSquare; i++)
         {
-            if (q == 1)
+            for (int j = 0; j < xNutAmountSquare; j++)
             {
-                nutZ = initialNutZ + .1f;
-                nutX = initialNutX + 2*spaceX + (spaceX / 2);
-                nutY = initialNutY + 2*spaceY + (spaceY / 2);
-            }
-            else if (q == 2)
-            {
-                nutZ = initialNutZ - .1f;
-                nutX = initialNutX + 2*spaceX + (spaceX / 2) - .4f;
-                nutY = initialNutY + 2*spaceY + (spaceY / 2) - .2f;
-            }
-            else
-            {
-                nutX = initialNutX + 2*(spaceX);
-                nutY = initialNutY + 2*(spaceY);
-            }
-            for (int i = 0; i < 1; i++)
-            {
-                for (int j = 0; j < xNutAmount + 1; j++)
-                {
-                    //Debug.Log("THIS HAPPENED");
-                    SpawnNut(i, j);
-                }
+                SpawnNut(i, j);
             }
         }
-
-        //Second layer below main square
-        for (int q = 0; q < 3; q++)
-        {
-            if (q == 1)
-            {
-                nutZ = initialNutZ + .1f;
-                nutX = initialNutX + (spaceX / 2) - spaceX;
-                nutY = initialNutY - initialYNutAmount * spaceY + (spaceY / 2) - spaceY;
-            }
-            else if (q == 2)
-            {
-                nutZ = initialNutZ - .1f;
-                nutX = initialNutX - spaceX + (spaceX / 2) - .4f;
-                nutY = initialNutY - initialYNutAmount * spaceY + (spaceY / 2) - .2f - spaceY;
-            }
-            else
-            {
-                nutX = initialNutX - spaceX;
-                nutY = initialNutY - initialYNutAmount * (spaceY) - spaceY;
-            }
-            for (int i = 0; i < 1; i++)
-            {
-                for (int j = 0; j < xNutAmount + 1; j++)
-                {
-                    //Debug.Log("THIS HAPPENED");
-                    SpawnNut(i, j);
-                }
-            }
-        }
-
-        //Second layer above main square
-        for (int q = 0; q < 3; q++)
-        {
-            if (q == 1)
-            {
-                nutZ = initialNutZ + .1f;
-                nutX = initialNutX + 3 * spaceX + (spaceX / 2);
-                nutY = initialNutY + 3 * spaceY + (spaceY / 2);
-            }
-            else if (q == 2)
-            {
-                nutZ = initialNutZ - .1f;
-                nutX = initialNutX + 3 * spaceX + (spaceX / 2) - .4f;
-                nutY = initialNutY + 3 * spaceY + (spaceY / 2) - .2f;
-            }
-            else
-            {
-                nutX = initialNutX + 3 * (spaceX);
-                nutY = initialNutY + 3 * (spaceY);
-            }
-            for (int i = 0; i < 1; i++)
-            {
-                for (int j = 0; j < xNutAmount + 3; j++)
-                {
-                    //Debug.Log("THIS HAPPENED");
-                    SpawnNut(i, j);
-                }
-            }
-        }
-
-        //Third layer below main square
-        for (int q = 0; q < 3; q++)
-        {
-            if (q == 1)
-            {
-                nutZ = initialNutZ + .1f;
-                nutX = initialNutX + (spaceX / 2);
-                nutY = initialNutY - initialYNutAmount * spaceY + (spaceY / 2) - (2*spaceY);
-            }
-            else if (q == 2)
-            {
-                nutZ = initialNutZ - .1f;
-                nutX = initialNutX + (spaceX / 2) - .4f;
-                nutY = initialNutY - initialYNutAmount * spaceY + (spaceY / 2) - .2f -(2*spaceY);
-            }
-            else
-            {
-                nutX = initialNutX;
-                nutY = initialNutY - initialYNutAmount * (spaceY) - (2*spaceY);
-            }
-            for (int i = 0; i < 1; i++)
-            {
-                for (int j = 0; j < xNutAmount + 3; j++)
-                {
-                    //Debug.Log("THIS HAPPENED");
-                    SpawnNut(i, j);
-                }
-            }
-        }
-
-        //Fourth layer above main square
-        for (int q = 0; q < 3; q++)
-        {
-            if (q == 1)
-            {
-                nutZ = initialNutZ + .1f;
-                nutX = initialNutX + 4 * spaceX + (spaceX / 2);
-                nutY = initialNutY + 4 * spaceY + (spaceY / 2);
-            }
-            else if (q == 2)
-            {
-                nutZ = initialNutZ - .1f;
-                nutX = initialNutX + 4 * spaceX + (spaceX / 2) - .4f;
-                nutY = initialNutY + 4 * spaceY + (spaceY / 2) - .2f;
-            }
-            else
-            {
-                nutX = initialNutX + 4 * (spaceX);
-                nutY = initialNutY + 4 * (spaceY);
-            }
-            for (int i = 0; i < 1; i++)
-            {
-                for (int j = 0; j < xNutAmount + 4; j++)
-                {
-                    //Debug.Log("THIS HAPPENED");
-                    SpawnNut(i, j);
-                }
-            }
-        }
+        //Round 1
+        //Round 2
+        //Round 3
+        //Round 4
+        //Round 5
+        //Round 6
+        //Round 7
+        //Round 8
+        //Round 9
+        //Round 10
+        //Round 11
+        //Round 12
     }
 
+    
     void SpawnNut(int i, int j)
     {
         nutPos = new Vector3(j * spaceX - nutX,
                                          -i * spaceY + nutY,
                                          nutZ);
-        GameObject tempNut = Instantiate(nutScoreObject, nutPos, Quaternion.identity, gameObject.transform);
+        GameObject tempNut = Instantiate(nutScoreObject, nutPos + gameObject.transform.position,
+            Quaternion.Euler(gameObject.transform.rotation.x,gameObject.transform.rotation.y,gameObject.transform.rotation.z), gameObject.transform);
         nutPool.Add(tempNut);
         MeshRenderer[] meshrends = tempNut.GetComponentsInChildren<MeshRenderer>();
         //Added in later when "nut art" is done.
@@ -401,72 +187,20 @@ public class ScoreNutSpawner : MonoBehaviour
 
         MeshRenderer[] meshrends = nutPool[nutCount - 1].GetComponentsInChildren<MeshRenderer>();
         meshrends[tempInt].enabled = true;
-        if(nutCount == (yNutAmount * xNutAmount) ||
-            nutCount == 2*(yNutAmount * xNutAmount)) //||
-            //nutCount == 3 * (yNutAmount * xNutAmount))
-        {
-            MoveEverythingBack(0);
-            //Debug.Log("Happened");
-        }
-
-        if(nutCount == 3*(yNutAmount * xNutAmount) + (xNutAmount) ||
-            nutCount == 3*(yNutAmount * xNutAmount) + 2*xNutAmount)
+        if(nutCount == xNutAmountSquare * yNutAmountSquare)
         {
             MoveEverythingBack(0);
         }
-
-        if(nutCount == 3*(yNutAmount * xNutAmount) + (4*xNutAmount) ||
-            nutCount == 3*(yNutAmount * xNutAmount) + (5*xNutAmount))
-        {
-            MoveEverythingBack(0);
-        }
-        if(nutCount == 3*(yNutAmount * xNutAmount) + (6*xNutAmount) + 2*(xNutAmount + 1) ||
-            nutCount == 3*(yNutAmount * xNutAmount) + (6*xNutAmount) + 3*(xNutAmount + 1))
-        {
-            MoveEverythingBack(0);
-            //Debug.Log("THIS HAPPENED");
-        }
-        //second row bottom
-        if (nutCount == 3 * (yNutAmount * xNutAmount) + (6 * xNutAmount) + 5 * (xNutAmount + 1) ||
-            nutCount == 3 * (yNutAmount * xNutAmount) + (6 * xNutAmount) + 6 * (xNutAmount + 1))
-        {
-            MoveEverythingBack(1);
-            //Debug.Log("THIS HAPPENED");
-        }
-        //Third row top
-        if (nutCount == 3 * (yNutAmount * xNutAmount) + (6 * xNutAmount) + 6 * (xNutAmount + 1) + 2 * (xNutAmount + 3) ||
-            nutCount == 3 * (yNutAmount * xNutAmount) + (6 * xNutAmount) + 6 * (xNutAmount + 1) + 3 * (xNutAmount + 3))
-        {
-            MoveEverythingBack(0);
-            //Debug.Log("THIS HAPPENED");
-        }
-        if (nutCount == 3 * (yNutAmount * xNutAmount) + (6 * xNutAmount) + 6 * (xNutAmount + 1) + 5 * (xNutAmount + 3) ||
-            nutCount == 3 * (yNutAmount * xNutAmount) + (6 * xNutAmount) + 6 * (xNutAmount + 1) + 6 * (xNutAmount + 3))
-        {
-            MoveEverythingBack(0);
-            //Debug.Log("THIS HAPPENED");
-        }
-        //Fourth layer top
-        if (nutCount == 3 * (yNutAmount * xNutAmount) + (6 * xNutAmount) + 6 * (xNutAmount + 1) + 6 * (xNutAmount + 3) + 2 * (xNutAmount + 4) ||
-            nutCount == 3 * (yNutAmount * xNutAmount) + (6 * xNutAmount) + 6 * (xNutAmount + 1) + 6 * (xNutAmount + 3) + 3 * (xNutAmount + 4))
-        {
-            MoveEverythingBack(2);
-            //Debug.Log("THIS HAPPENED");
-        }
+    
     }
 
     public void MoveEverythingBack(int j)
     {
-        if(j == 0)
+        
+        if (j == 0)
         {
-            gameObject.GetComponent<Transform>().position = gameObject.GetComponent<Transform>().position + new Vector3(0, 0, .5f);
-        }else if(j == 1)
-        {
-            gameObject.GetComponent<Transform>().position = gameObject.GetComponent<Transform>().position + new Vector3(0, .2f, .5f);
-        }else if (j == 2)
-        {
-            gameObject.GetComponent<Transform>().position = gameObject.GetComponent<Transform>().position + new Vector3(0, 0, .5f);
-            gameObject.transform.Rotate(0,0,5f);
+            Vector3 addVec = new Vector3(-0.02f, 0.08f, 0.89f) - gameObject.GetComponent<Transform>().position;
+            gameObject.GetComponent<Transform>().position = gameObject.GetComponent<Transform>().position + addVec;
         }
     
 

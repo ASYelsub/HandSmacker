@@ -6,6 +6,8 @@ Todo:
 -fix spawn in time for nuts and conveyers
 -menu buttons
 -nut breaking effect
+-widen hammer bounds
+-look into Notch Solution
 
 -redo start screen
 -make credits screen
@@ -24,6 +26,7 @@ Done:
 -lerps up from bottom of screen & pauses everything
 -menu can work with raycasts now
 -pick a color randomly for fireworks
+-have menu work with touch
 
 
 Nut smasher edits:
@@ -43,3 +46,19 @@ http://glennmurphy.weebly.com/texture-sheet-animation.html
 -convey "that its fine" that players missed a nut
 
 
+round - sideBuff - topbottombuff- pos
+1 - 2 - 1 - 0.03,0.4,-0.4
+2 - 5 - 2 - 0.03,0.59,1.34
+3 - 6 - 3 - 0.03,0.88,3
+4 - 10 - 4 - 0.03,1.16,5.4
+5 - 12 - 5 - 0.08,1.34,7.19
+6 - 14 - 6 - 0.08,1.61,8.76
+7 - 16 - 7 - -0.15,1.82,10.6
+8 - 18 - 8 - -0.62,2.2,12.69
+9 - 20 - 9 - -0.62,2.38,14.49
+10 - NA - 10 - -0.62,2.83,16.46
+11 - NA - 11 - 1.2,3.44,18.08
+12 - NA - NA - 1.73,4.18,21.32
+
+Credits:
+-peanut from https://www.freeimages.com/photo/peanuts-amendoim-1613845
