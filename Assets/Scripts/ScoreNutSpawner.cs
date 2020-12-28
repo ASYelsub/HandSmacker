@@ -337,6 +337,36 @@ public class ScoreNutSpawner : MonoBehaviour
                 }
             }
         }
+
+        //Fourth layer above main square
+        for (int q = 0; q < 3; q++)
+        {
+            if (q == 1)
+            {
+                nutZ = initialNutZ + .1f;
+                nutX = initialNutX + 4 * spaceX + (spaceX / 2);
+                nutY = initialNutY + 4 * spaceY + (spaceY / 2);
+            }
+            else if (q == 2)
+            {
+                nutZ = initialNutZ - .1f;
+                nutX = initialNutX + 4 * spaceX + (spaceX / 2) - .4f;
+                nutY = initialNutY + 4 * spaceY + (spaceY / 2) - .2f;
+            }
+            else
+            {
+                nutX = initialNutX + 4 * (spaceX);
+                nutY = initialNutY + 4 * (spaceY);
+            }
+            for (int i = 0; i < 1; i++)
+            {
+                for (int j = 0; j < xNutAmount + 4; j++)
+                {
+                    //Debug.Log("THIS HAPPENED");
+                    SpawnNut(i, j);
+                }
+            }
+        }
     }
 
     void SpawnNut(int i, int j)
@@ -416,6 +446,13 @@ public class ScoreNutSpawner : MonoBehaviour
             MoveEverythingBack(0);
             //Debug.Log("THIS HAPPENED");
         }
+        //Fourth layer top
+        if (nutCount == 3 * (yNutAmount * xNutAmount) + (6 * xNutAmount) + 6 * (xNutAmount + 1) + 6 * (xNutAmount + 3) + 2 * (xNutAmount + 4) ||
+            nutCount == 3 * (yNutAmount * xNutAmount) + (6 * xNutAmount) + 6 * (xNutAmount + 1) + 6 * (xNutAmount + 3) + 3 * (xNutAmount + 4))
+        {
+            MoveEverythingBack(2);
+            //Debug.Log("THIS HAPPENED");
+        }
     }
 
     public void MoveEverythingBack(int j)
@@ -426,7 +463,13 @@ public class ScoreNutSpawner : MonoBehaviour
         }else if(j == 1)
         {
             gameObject.GetComponent<Transform>().position = gameObject.GetComponent<Transform>().position + new Vector3(0, .2f, .5f);
+        }else if (j == 2)
+        {
+            gameObject.GetComponent<Transform>().position = gameObject.GetComponent<Transform>().position + new Vector3(0, 0, .5f);
+            gameObject.transform.Rotate(0,0,5f);
         }
+    
+
 
     }
     
