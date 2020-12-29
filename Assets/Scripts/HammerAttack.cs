@@ -108,6 +108,7 @@ public class HammerAttack : MonoBehaviour
                     //Am currently unsure how screen shake should manifest for non-nut hammering.
                     //Don't want to mentally exhaust the player by having them see the screen shake too much.
                     //Also the impact of the nut smash is lessened if there is screen shake all the time.
+                    //To change "nutcollision" just get rid of the exclamation... i think? There's probably more that needs to be tweaked but yeah.
                     if (!nutCollision)
                     {
                         StartCoroutine(cameraShake.Shake(1f * cameraShake.duration, 1f * cameraShake.magnitude));

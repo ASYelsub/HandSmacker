@@ -26,6 +26,13 @@ public class StartScript : MonoBehaviour
     [SerializeField]
     private AudioClip iceCrack;
 
+    private void Awake()
+    {
+        HapticFeedbackIOS.InitSelectionFeedback();
+        HapticFeedbackIOS.InitImpactFeedback(0);
+        HapticFeedbackIOS.InitImpactFeedback(1);
+        HapticFeedbackIOS.InitImpactFeedback(2);
+    }
     private void Start()
     {
         optionsOn = false;
@@ -53,6 +60,7 @@ public class StartScript : MonoBehaviour
 
     public void startCreditFunc(bool creditsOn)
     {
+        gameObject.GetComponent<AudioSource>().PlayOneShot(iceCrack);
         if (!creditsOn)
         {
             StartCoroutine(MoveCreditsUp());
@@ -65,6 +73,7 @@ public class StartScript : MonoBehaviour
 
     public void startOptionFunc(bool optionsOn)
     {
+        gameObject.GetComponent<AudioSource>().PlayOneShot(iceCrack);
         if (!optionsOn)
         {
             StartCoroutine(MoveOptionsUp());
