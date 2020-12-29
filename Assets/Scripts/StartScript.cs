@@ -6,14 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class StartScript : MonoBehaviour
 {
-    private Vector2 creditsOnMin;
-    private Vector2 creditsOffMin;
-    private Vector2 optionsOnMin;
-    private Vector2 optionsOffMin;
-    private Vector2 creditsOnMax;
-    private Vector2 creditsOffMax;
-    private Vector2 optionsOnMax;
-    private Vector2 optionsOffMax;
+    private Vector3 creditsOnPos;
+    private Vector3 creditsOffPos;
+
+    bool creditsOn;
+    bool menuIsMoving;
 
     [SerializeField]
     private GameObject creditsPanel;
@@ -24,10 +21,10 @@ public class StartScript : MonoBehaviour
 
     private void Start()
     {
-        creditsOnMax = new Vector2(creditsPanel.GetComponent<RectTransform>().offsetMax.x, 46f);
-        creditsOnMin = new Vector2(creditsPanel.GetComponent<RectTransform>().offsetMin.x,-46f);
-        creditsOffMax = new Vector2(creditsPanel.GetComponent<RectTransform>().offsetMax.x, 511f);
-        creditsOffMin = new Vector2(creditsPanel.GetComponent<RectTransform>().offsetMin.x,-511f);
+        creditsOn = false;
+        menuIsMoving = false;
+        creditsOffPos = new Vector3(0, -484);
+        creditsOnPos = new Vector3(0, -19);
     }
 
     /* Specifically on computer mode
@@ -44,5 +41,47 @@ public class StartScript : MonoBehaviour
     {
         SceneManager.LoadScene(1);
         gameObject.GetComponent<AudioSource>().PlayOneShot(iceCrack);
+    }
+
+    public void startCreditFunc(bool creditsOn)
+    {
+        if (!creditsOn)
+        {
+            StartCoroutine(MoveCreditsUp());
+        }
+        else
+        {
+            StartCoroutine(MoveCreditsDown());
+        }
+
+    }
+
+    private IEnumerator MoveCreditsUp()
+    {
+        float timer = 0;
+        while (timer < 1)
+        {
+            creditsPanel.GetComponent<RectTransform>().anchoredPosition = Vector3.Lerp(creditsOffPos, creditsOnPos, timer);
+            Debug.Log("HELLO");
+            timer = timer + .01f;
+            yield return null;
+        }
+        menuIsMoving = false;
+        creditsOn = true;
+        yield return null;
+    }
+
+    private IEnumerator MoveCreditsDown()
+    {
+        float timer = 0;
+        while (timer < 1)
+        {
+            creditsPanel.GetComponent<RectTransform>().anchoredPosition = Vector3.Lerp(creditsOnPos, creditsOffPos, timer);
+            timer = timer + .01f;
+            yield return null;
+        }
+        menuIsMoving = false;
+        creditsOn = false;
+        yield return null;
     }
 }
