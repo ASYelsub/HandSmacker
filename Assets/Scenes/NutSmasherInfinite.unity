@@ -11574,8 +11574,8 @@ MonoBehaviour:
     type: 3}
   initialLocation: {x: 0, y: -0.16, z: -7.69}
   initialRotation: {x: 0, y: 90, z: 0}
-  secondInitialPos: {x: 8, y: -0.16, z: -7.69}
-  despawnPos: {x: -8, y: -0.016, z: -7.69}
+  secondInitialPos: {x: 8.38, y: -0.16, z: -7.69}
+  despawnPos: {x: -8.38, y: -0.016, z: -7.69}
 --- !u!1 &1534357915
 GameObject:
   m_ObjectHideFlags: 0
