@@ -8,7 +8,7 @@ Todo:
 -nut breaking effect
 -widen hammer bounds
 -look into Notch Solution
-
+-redo hammer texture
 -redo start screen
 -make credits screen
 -menu w color changes for player, w music volume, w sfx volume... playerPrefs? fireworks or flowers

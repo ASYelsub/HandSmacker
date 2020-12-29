@@ -189,6 +189,7 @@ public class ScoreNutSpawner : MonoBehaviour
         meshrends[tempInt].enabled = true;
         if(nutCount == xNutAmountSquare * yNutAmountSquare)
         {
+            SceneManager.LoadScene(2); //For playtesting builds
             MoveEverythingBack(0);
         }
     
