@@ -1,22 +1,22 @@
 Currently:
 -refactor nut score code in nested for-loop with giant object pool in the beginning, score counted by turning on/off different mesh renderers,
-
+-playtest different kinds of camera shake on tigsource
 
 Todo:
--fix spawn in time for nuts and conveyers
 -menu buttons
 -nut breaking effect
 -widen hammer bounds
 -look into Notch Solution
--redo hammer texture
+
 -redo start screen
 -make credits screen
--menu w color changes for player, w music volume, w sfx volume... playerPrefs? fireworks or flowers
-
+-haptics
+-apple developer stuff??
 -remove unneeded objects/scripts
--playtest different kinds of camera shake on tigsource
+
 -playtest amount of fireworks in background on tigsource: is too many distracting, is not enough confusing?
 -later: implement robert's procgen concept with procgen zelda pattern
+-menu w color changes for player, w music volume, w sfx volume... playerPrefs? fireworks or flowers
 
 
 
@@ -27,6 +27,10 @@ Done:
 -menu can work with raycasts now
 -pick a color randomly for fireworks
 -have menu work with touch
+-fix spawn in time for nuts and conveyers
+-redo hammer texture
+-fixed hammer lighting
+
 
 
 Nut smasher edits:

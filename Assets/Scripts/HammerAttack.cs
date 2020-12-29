@@ -143,6 +143,9 @@ public class HammerAttack : MonoBehaviour
         }
         
     }
+
+
+
     private IEnumerator SpawnFirework(float fireworkTimer)
     {
         yield return new WaitForSeconds(.2f);

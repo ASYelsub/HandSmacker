@@ -9,6 +9,20 @@ TagManager:
   - pecan
   - Exit
   - Enter
+  - SFX1
+  - SFX2
+  - SFX3
+  - SFX4
+  - SFX5
+  - SFX6
+  - SFX7
+  - Music1
+  - Music2
+  - Music3
+  - Music4
+  - Music5
+  - Music6
+  - Music7
   layers:
   - Default
   - TransparentFX

@@ -15,8 +15,16 @@ public class Menu : MonoBehaviour
     Vector3 menuOffPos;
     Vector3 enterPos;
     Vector3 enterHiddenPos;
-     
-    //Raycast stuff
+
+    [Header("Audio Stuff")]
+    [SerializeField] private GameObject[] musicVol;
+    [SerializeField] private GameObject[] sfxVol;
+    [SerializeField] private Material selectMat;
+    [SerializeField] private Material notSelectMat;
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource sfxSource;
+
+    [Header("Raycast Stuff")]
     Vector2 mousePos;
     [SerializeField]private Camera cam;
     [SerializeField] private GameObject closeMenuButton;
@@ -47,10 +55,82 @@ public class Menu : MonoBehaviour
         else if (currentMenuState)
         {
             StartCoroutine(MoveMenuDown());
-
         }
     }
 
+    private void setMusicVolume(int i)
+    {
+        GameObject pickedVol = musicVol[i];
+        for(int j = 0; j < musicVol.Length; j++)
+        {
+            musicVol[j].GetComponent<MeshRenderer>().material = notSelectMat;
+        }
+        switch (i)
+        {
+            case 0:
+                musicSource.GetComponent<AudioSource>().volume = 0.05f;
+                break;
+            case 1:
+                musicSource.GetComponent<AudioSource>().volume = 0.2f;
+                break;
+            case 2:
+                musicSource.GetComponent<AudioSource>().volume = 0.3f;
+                break;
+            case 3:
+                musicSource.GetComponent<AudioSource>().volume = 0.4f;
+                break;
+            case 4:
+                musicSource.GetComponent<AudioSource>().volume = 0.5f;
+                break;
+            case 5:
+                musicSource.GetComponent<AudioSource>().volume = 0.6f;
+                break;
+            case 6:
+                musicSource.GetComponent<AudioSource>().volume = 0.7f;
+                break;
+            case 7:
+                musicSource.GetComponent<AudioSource>().volume = 0.94f;
+                break;
+        }
+        musicVol[i].GetComponent<MeshRenderer>().material = selectMat;
+    }
+
+    private void setSFXVolume(int i)
+    {
+        GameObject pickedVol = sfxVol[i];
+        for(int j = 0; j < sfxVol.Length; j++)
+        {
+            sfxVol[j].GetComponent<MeshRenderer>().material = notSelectMat;
+        }
+        switch (i)
+        {
+            case 0:
+                sfxSource.GetComponent<AudioSource>().volume = 0.05f;
+                break;
+            case 1:
+                sfxSource.GetComponent<AudioSource>().volume = 0.2f;
+                break;
+            case 2:
+                sfxSource.GetComponent<AudioSource>().volume = 0.3f;
+                break;
+            case 3:
+                sfxSource.GetComponent<AudioSource>().volume = 0.4f;
+                break;
+            case 4:
+                sfxSource.GetComponent<AudioSource>().volume = 0.5f;
+                break;
+            case 5:
+                sfxSource.GetComponent<AudioSource>().volume = 0.6f;
+                break;
+            case 6:
+                sfxSource.GetComponent<AudioSource>().volume = 0.7f;
+                break;
+            case 7:
+                sfxSource.GetComponent<AudioSource>().volume = 0.94f;
+                break;
+        }
+        sfxVol[i].GetComponent<MeshRenderer>().material = selectMat;
+    }
 
     private IEnumerator MoveMenuUp()
     {
@@ -136,6 +216,63 @@ public class Menu : MonoBehaviour
                 TurnMenuOnOff(menuOn);
                 menuIsMoving = true;
             }
+            if(hit.collider.tag == "SFX1")
+            {
+                setSFXVolume(0);
+            }
+            if (hit.collider.tag == "SFX2")
+            {
+                setSFXVolume(1);
+            }
+            if (hit.collider.tag == "SFX3")
+            {
+                setSFXVolume(2);
+            }
+            if (hit.collider.tag == "SFX4")
+            {
+                setSFXVolume(3);
+            }
+            if (hit.collider.tag == "SFX5")
+            {
+                setSFXVolume(4);
+            }
+            if (hit.collider.tag == "SFX6")
+            {
+                setSFXVolume(5);
+            }
+            if (hit.collider.tag == "SFX7")
+            {
+                setSFXVolume(6);
+            }
+            if(hit.collider.tag == "Music1")
+            {
+                setMusicVolume(0);
+            }
+            if (hit.collider.tag == "Music2")
+            {
+                setMusicVolume(1);
+            }
+            if (hit.collider.tag == "Music3")
+            {
+                setMusicVolume(2);
+            }
+            if (hit.collider.tag == "Music4")
+            {
+                setMusicVolume(3);
+            }
+            if (hit.collider.tag == "Music5")
+            {
+                setMusicVolume(4);
+            }
+            if (hit.collider.tag == "Music6")
+            {
+                setMusicVolume(5);
+            }
+            if (hit.collider.tag == "Music7")
+            {
+                setMusicVolume(6);
+            }
+
         }
         shootRay = false;
     }
