@@ -7,6 +7,15 @@ public class GameManager : MonoBehaviour
 {
     public Menu menu;
     private float timer = 0;
+
+    private void Awake()
+    {
+        HapticFeedbackIOS.InitSelectionFeedback();
+        HapticFeedbackIOS.InitImpactFeedback(0);
+        HapticFeedbackIOS.InitImpactFeedback(1);
+        HapticFeedbackIOS.InitImpactFeedback(2); HapticFeedbackIOS.InitNotificationFeedback();
+    }
+
     void Update()
     {
         if (Input.GetKey(KeyCode.Space))

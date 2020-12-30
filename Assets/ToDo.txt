@@ -3,20 +3,20 @@ Currently:
 -playtest different kinds of camera shake on tigsource
 
 Todo:
--menu buttons
 -nut breaking effect
 -widen hammer bounds
 -look into Notch Solution
-
+-make haptics work in build??
 -redo start screen
 -make credits screen
--haptics
 -apple developer stuff??
 -remove unneeded objects/scripts
-
 -playtest amount of fireworks in background on tigsource: is too many distracting, is not enough confusing?
 -later: implement robert's procgen concept with procgen zelda pattern
 -menu w color changes for player, w music volume, w sfx volume... playerPrefs? fireworks or flowers
+-unity pro to get rid of unity start screen
+-fix lighting in build
+
 
 
 
@@ -30,6 +30,9 @@ Done:
 -fix spawn in time for nuts and conveyers
 -redo hammer texture
 -fixed hammer lighting
+-set up apple developer stuff
+-gameplay menu buttons
+
 
 
 

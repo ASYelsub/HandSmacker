@@ -26,13 +26,7 @@ public class StartScript : MonoBehaviour
     [SerializeField]
     private AudioClip iceCrack;
 
-    private void Awake()
-    {
-        HapticFeedbackIOS.InitSelectionFeedback();
-        HapticFeedbackIOS.InitImpactFeedback(0);
-        HapticFeedbackIOS.InitImpactFeedback(1);
-        HapticFeedbackIOS.InitImpactFeedback(2);
-    }
+    
     private void Start()
     {
         optionsOn = false;

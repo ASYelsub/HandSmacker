@@ -23,6 +23,8 @@ TagManager:
   - Music5
   - Music6
   - Music7
+  - Screenshake
+  - Haptics
   layers:
   - Default
   - TransparentFX

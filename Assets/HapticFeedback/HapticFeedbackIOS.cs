@@ -47,7 +47,7 @@ public class HapticFeedbackIOS {
 
 	public static void InitImpactFeedback (int strength)
 	{
-		if ( Application.platform == RuntimePlatform.IPhonePlayer )
+		if ( Application.platform == RuntimePlatform.IPhonePlayer)
 		{
 			_initImpactFeedback(strength);
 		}
@@ -66,6 +66,7 @@ public class HapticFeedbackIOS {
 		if ( Application.platform == RuntimePlatform.IPhonePlayer)
 		{
 			_impactFeedback(strength);
+			Debug.Log("THIS HAPPENED");
 		}
 	}
 

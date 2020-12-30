@@ -15,6 +15,12 @@ public class Menu : MonoBehaviour
     Vector3 menuOffPos;
     Vector3 enterPos;
     Vector3 enterHiddenPos;
+    [Header ("Options")]
+    [SerializeField] private GameObject hapticsToggle;
+    [SerializeField] private GameObject screenshakeToggle;
+    [HideInInspector]public bool hapticsOn;
+    [HideInInspector]public bool screenshakeOn;
+
 
     [Header("Audio Stuff")]
     [SerializeField] private GameObject[] musicVol;
@@ -23,6 +29,8 @@ public class Menu : MonoBehaviour
     [SerializeField] private Material notSelectMat;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip click;
+    [SerializeField] private AudioClip switchClick;
 
     [Header("Raycast Stuff")]
     Vector2 mousePos;
@@ -34,6 +42,8 @@ public class Menu : MonoBehaviour
     Vector3 worldPos;
     void Start()
     {
+        screenshakeOn = true;
+        hapticsOn = true;
         enterPos = new Vector3(0.6376439f, -0.3511f, 0.5639391f);
         enterHiddenPos = new Vector3(0.6809f,-0.3511f, 0.5639391f);
         shootRay = false;
@@ -48,6 +58,7 @@ public class Menu : MonoBehaviour
 
     public void TurnMenuOnOff(bool currentMenuState)
     {
+        sfxSource.PlayOneShot(switchClick);
         if (!currentMenuState)
         {
             StartCoroutine(MoveMenuUp());
@@ -61,7 +72,8 @@ public class Menu : MonoBehaviour
     private void setMusicVolume(int i)
     {
         GameObject pickedVol = musicVol[i];
-        for(int j = 0; j < musicVol.Length; j++)
+        sfxSource.PlayOneShot(click);
+        for (int j = 0; j < musicVol.Length; j++)
         {
             musicVol[j].GetComponent<MeshRenderer>().material = notSelectMat;
         }
@@ -98,6 +110,7 @@ public class Menu : MonoBehaviour
     private void setSFXVolume(int i)
     {
         GameObject pickedVol = sfxVol[i];
+        sfxSource.PlayOneShot(click);
         for(int j = 0; j < sfxVol.Length; j++)
         {
             sfxVol[j].GetComponent<MeshRenderer>().material = notSelectMat;
@@ -196,6 +209,33 @@ public class Menu : MonoBehaviour
         }
     }
 
+    void toggleScreenShake()
+    {
+        sfxSource.PlayOneShot(click);
+        if (screenshakeOn)
+        {
+            screenshakeToggle.GetComponent<MeshRenderer>().enabled = false;
+        }
+        else
+        {
+            screenshakeToggle.GetComponent<MeshRenderer>().enabled = true;
+        }
+        screenshakeOn = !screenshakeOn;
+    }
+    void toggleHaptics()
+    {
+        sfxSource.PlayOneShot(click);
+        if (hapticsOn)
+        {
+            hapticsToggle.GetComponent<MeshRenderer>().enabled = false;
+        }
+        else
+        {
+            hapticsToggle.GetComponent<MeshRenderer>().enabled = true;
+        }
+        hapticsOn = !hapticsOn;
+    }
+
     void ButtonRay()
     {
         Debug.Log(worldPos.x + " " + worldPos.y);
@@ -271,6 +311,14 @@ public class Menu : MonoBehaviour
             if (hit.collider.tag == "Music7")
             {
                 setMusicVolume(6);
+            }
+            if(hit.collider.tag == "Haptics")
+            {
+                toggleHaptics();
+            }
+            if(hit.collider.tag == "Screenshake")
+            {
+                toggleScreenShake();
             }
 
         }
