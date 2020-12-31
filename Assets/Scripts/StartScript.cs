@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class StartScript : MonoBehaviour
 {
-    private Vector3 creditsOnPos;
-    private Vector3 creditsOffPos;
+    [SerializeField]private Vector3 creditsOnPos;
+    [SerializeField]private Vector3 creditsOffPos;
 
     bool creditsOn;
     bool optionsOn;
@@ -32,8 +32,6 @@ public class StartScript : MonoBehaviour
         optionsOn = false;
         creditsOn = false;
         menuIsMoving = false;
-        creditsOffPos = new Vector3(0, -484);
-        creditsOnPos = new Vector3(0, -19);
     }
 
     /* Specifically on computer mode
@@ -84,9 +82,8 @@ public class StartScript : MonoBehaviour
         while (timer < 1)
         {
             creditsPanel.GetComponent<RectTransform>().anchoredPosition = Vector3.Lerp(creditsOffPos, creditsOnPos, timer);
-            hammers[0].GetComponent<Transform>().position = Vector3.Lerp(hammerOnPos[0], hammerOffPos[0], timer);
-            hammers[1].GetComponent<Transform>().position = Vector3.Lerp(hammerOnPos[1], hammerOffPos[1], timer);
-            Debug.Log("HELLO");
+            hammers[0].GetComponent<Transform>().localPosition = Vector3.Lerp(hammerOnPos[0], hammerOffPos[0], timer);
+            hammers[1].GetComponent<Transform>().localPosition = Vector3.Lerp(hammerOnPos[1], hammerOffPos[1], timer);
             timer = timer + .01f;
             yield return null;
         }
@@ -100,8 +97,8 @@ public class StartScript : MonoBehaviour
         while (timer < 1)
         {
             creditsPanel.GetComponent<RectTransform>().anchoredPosition = Vector3.Lerp(creditsOnPos, creditsOffPos, timer);
-            hammers[0].GetComponent<Transform>().position = Vector3.Lerp(hammerOffPos[0], hammerOnPos[0], timer);
-            hammers[1].GetComponent<Transform>().position = Vector3.Lerp(hammerOffPos[1], hammerOnPos[1], timer);
+            hammers[0].GetComponent<Transform>().localPosition = Vector3.Lerp(hammerOffPos[0], hammerOnPos[0], timer);
+            hammers[1].GetComponent<Transform>().localPosition = Vector3.Lerp(hammerOffPos[1], hammerOnPos[1], timer);
             timer = timer + .01f;
             yield return null;
         }
@@ -116,9 +113,8 @@ public class StartScript : MonoBehaviour
         while (timer < 1)
         {
             optionsPanel.GetComponent<RectTransform>().anchoredPosition = Vector3.Lerp(creditsOffPos, creditsOnPos, timer);
-            hammers[0].GetComponent<Transform>().position = Vector3.Lerp(hammerOnPos[0], hammerOffPos[0], timer);
-            hammers[1].GetComponent<Transform>().position = Vector3.Lerp(hammerOnPos[1], hammerOffPos[1], timer);
-            Debug.Log("HELLO");
+            hammers[0].GetComponent<Transform>().localPosition = Vector3.Lerp(hammerOnPos[0], hammerOffPos[0], timer);
+            hammers[1].GetComponent<Transform>().localPosition = Vector3.Lerp(hammerOnPos[1], hammerOffPos[1], timer);
             timer = timer + .01f;
             yield return null;
         }
@@ -132,8 +128,8 @@ public class StartScript : MonoBehaviour
         while (timer < 1)
         {
             optionsPanel.GetComponent<RectTransform>().anchoredPosition = Vector3.Lerp(creditsOnPos, creditsOffPos, timer);
-            hammers[0].GetComponent<Transform>().position = Vector3.Lerp(hammerOffPos[0], hammerOnPos[0], timer);
-            hammers[1].GetComponent<Transform>().position = Vector3.Lerp(hammerOffPos[1], hammerOnPos[1], timer);
+            hammers[0].GetComponent<Transform>().localPosition = Vector3.Lerp(hammerOffPos[0], hammerOnPos[0], timer);
+            hammers[1].GetComponent<Transform>().localPosition = Vector3.Lerp(hammerOffPos[1], hammerOnPos[1], timer);
             timer = timer + .01f;
             yield return null;
         }
