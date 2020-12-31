@@ -38,7 +38,7 @@ public class NutSpawner : MonoBehaviour
     {
         if(!menu.menuIsMoving && !menu.menuOn)
         {
-            if (amountOfNutsOnScreen >= maxAmountOfNutsOnScreen - 1)
+            if (amountOfNutsOnScreen >= maxAmountOfNutsOnScreen)
             {
                 nutsMaxed = true;
             }
@@ -51,17 +51,17 @@ public class NutSpawner : MonoBehaviour
                     if (randomizer >= 2f)
                     {
                         Instantiate(almond, nutSpawner.transform, false);
-                        IncreaseNutCount();
+                        
                     }
                     else if (randomizer < 2f && randomizer >= 1f)
                     {
                         Instantiate(cashew, nutSpawner.transform, false);
-                        IncreaseNutCount();
                     }
                     else
                     {
                         Instantiate(pecan, nutSpawner.transform, false);
                     }
+                    IncreaseNutCount();
 
                     timer = 0;
                 }

@@ -112,7 +112,7 @@ public class HammerAttack : MonoBehaviour
                         //Don't want to mentally exhaust the player by having them see the screen shake too much.
                         //Also the impact of the nut smash is lessened if there is screen shake all the time.
                         //To change "nutcollision" just get rid of the exclamation... i think? There's probably more that needs to be tweaked but yeah.
-                        if (!nutCollision)
+                        if (nutCollision)
                         {
                             if (menu.screenshakeOn)
                             {

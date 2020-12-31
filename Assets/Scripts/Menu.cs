@@ -11,10 +11,10 @@ public class Menu : MonoBehaviour
 
     [HideInInspector]public bool menuOn;
     [HideInInspector]public bool menuIsMoving;
-    Vector3 menuOnPos;
-    Vector3 menuOffPos;
-    Vector3 enterPos;
-    Vector3 enterHiddenPos;
+    [SerializeField]Vector3 menuOnPos;
+    [SerializeField]Vector3 menuOffPos;
+    [SerializeField]Vector3 enterPos;
+    [SerializeField]Vector3 enterHiddenPos;
     [Header ("Options")]
     [SerializeField] private GameObject hapticsToggle;
     [SerializeField] private GameObject screenshakeToggle;
@@ -44,12 +44,8 @@ public class Menu : MonoBehaviour
     {
         screenshakeOn = true;
         hapticsOn = true;
-        enterPos = new Vector3(0.6376439f, -0.3511f, 0.5639391f);
-        enterHiddenPos = new Vector3(0.6809f,-0.3511f, 0.5639391f);
         shootRay = false;
-        menuOnPos = new Vector3(0, -0.06700065f, 0.60448f);
         //scale of 0.126693,0.126693,0.08172395
-        menuOffPos = new Vector3(0f, -0.754f, 0.60448f);
         menuOn = false;
         menuIsMoving = false;
         menuTransform = gameObject.GetComponent<Transform>();

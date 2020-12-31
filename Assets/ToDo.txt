@@ -51,7 +51,9 @@ https://learn.unity.com/tutorial/particles-texture-sheet-animation
 http://glennmurphy.weebly.com/texture-sheet-animation.html
 -have particles move less in depth space, dont go out towards camera as much, can be in a small range in depth axis
 -convey "that its fine" that players missed a nut
-
+-flickering .01% ballsack mode (kudos to ali)
+-evolution mode (kudos to finn)
+-insult mode: every time the player misses, the hammer and nuts insult the player (kudos to ali)
 
 round - sideBuff - topbottombuff- pos
 1 - 2 - 1 - 0.03,0.4,-0.4
