@@ -5899,7 +5899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentNutRound: 0
-  amountOfNutPerRound: 0
+  amountOfNutPerRound: 
   nutPrefabs:
   - {fileID: 5839209781083398133, guid: 9c60e665db5e34630bc826b40ef704a7, type: 3}
   - {fileID: 6774785700647072753, guid: e1068113fb5ec4803b70062c17a78d25, type: 3}
@@ -17031,7 +17031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentNutRound: 0
-  amountOfNutPerRound: 0
+  amountOfNutPerRound: 
   nutPrefabs:
   - {fileID: 5839209781083398133, guid: 9c60e665db5e34630bc826b40ef704a7, type: 3}
   - {fileID: 6774785700647072753, guid: e1068113fb5ec4803b70062c17a78d25, type: 3}
@@ -18357,7 +18357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentNutRound: 0
-  amountOfNutPerRound: 0
+  amountOfNutPerRound: 
   nutPrefabs:
   - {fileID: 5839209781083398133, guid: 9c60e665db5e34630bc826b40ef704a7, type: 3}
   - {fileID: 6774785700647072753, guid: e1068113fb5ec4803b70062c17a78d25, type: 3}
