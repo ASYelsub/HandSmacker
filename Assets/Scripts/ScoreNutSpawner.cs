@@ -29,7 +29,9 @@ public class ScoreNutSpawner : MonoBehaviour
     private Vector3[] roundPositions = new Vector3[13];
     private int amountAddedToSides;
     private int amountAddedToTopAndBottom;
-    
+
+    [HideInInspector]public int currentNutRound;
+    [HideInInspector]public int amountOfNutPerRound; //hook this variable up
 
 
     [SerializeField]
@@ -64,19 +66,21 @@ public class ScoreNutSpawner : MonoBehaviour
 
     //Most of these are for specifically 16x9
     [Header("Tuning Variables")]
-    [SerializeField] private float xNutAmountSquare;
-    [SerializeField] private float yNutAmountSquare;
+    [SerializeField] private int xNutAmountSquare;
+    [SerializeField] private int yNutAmountSquare;
     [SerializeField] private float spaceAmount; //for the screenspecfic one
     [SerializeField] private float nutX;
     [SerializeField] private float nutY;
     [SerializeField] private float spaceX;
     [SerializeField] private float spaceY;
 
-    private float initialYNutAmount, initialXNutAmount, initialNutZ, initialNutX,initialNutY;
+    private int initialYNutAmount, initialXNutAmount;
+    private float initialNutZ, initialNutX,initialNutY;
     //Thesea are all screen specific ones
     private float widthRatio, heightRatio, nutSpacerWidth, nutSpacerHeight, nutStartX, nutStartY;
     private Vector3 nutPos;
     public float spacer;
+
 
     private List<GameObject> nutPool = new List<GameObject>();
     
@@ -98,6 +102,9 @@ public class ScoreNutSpawner : MonoBehaviour
 
         nutZ = 0f;
 
+        currentNutRound = 0;
+        amountOfNutPerRound = xNutAmountSquare * yNutAmountSquare;
+
         initialYNutAmount = yNutAmountSquare;
         initialXNutAmount = xNutAmountSquare;
         initialNutX = nutX;
@@ -111,7 +118,7 @@ public class ScoreNutSpawner : MonoBehaviour
         widthRatio = (screenWidth / screenHeight);
         //Debug.Log(" widthRatio: " + widthRatio + " heightRatio: " + heightRatio + " screenWidth: " + screenWidth + " screenHeight: " + screenHeight);
         nutCount = 0;
-      
+       
 
 
         nutSpacerWidth = (screenWidth / (xNutAmountSquare * spaceAmount)) * widthRatio;
@@ -123,6 +130,7 @@ public class ScoreNutSpawner : MonoBehaviour
 
         NutPool();
     }
+    
 
     void NutPool()
     {
@@ -130,15 +138,11 @@ public class ScoreNutSpawner : MonoBehaviour
         yNutAmountSquare = initialYNutAmount;
         xNutAmountSquare = initialXNutAmount;
 
-
+        //    Debug.Log("in nut pool");
         //Round 0
-        for (int i = 0; i < yNutAmountSquare; i++)
-        {
-            for (int j = 0; j < xNutAmountSquare; j++)
-            {
-                SpawnNut(i, j);
-            }
-        }
+
+        Round0();
+        Round1();
         //Round 1
         //Round 2
         //Round 3
@@ -152,60 +156,115 @@ public class ScoreNutSpawner : MonoBehaviour
         //Round 11
         //Round 12
     }
-
-    
-    void SpawnNut(int i, int j)
-    {
-        nutPos = new Vector3(j * spaceX - nutX,
-                                         -i * spaceY + nutY,
-                                         nutZ);
-        GameObject tempNut = Instantiate(nutScoreObject, nutPos + gameObject.transform.position,
-            Quaternion.Euler(gameObject.transform.rotation.x,gameObject.transform.rotation.y,gameObject.transform.rotation.z), gameObject.transform);
-        nutPool.Add(tempNut);
-        MeshRenderer[] meshrends = tempNut.GetComponentsInChildren<MeshRenderer>();
-        //Added in later when "nut art" is done.
-        for(int k = 0; k < meshrends.Length; k++)
-        {
-            meshrends[k].enabled = false;
-        }
-    }
     private void Update()
     {
+        //Debug.Log(nutCount +" "+ nutPool.Count);
         if (nutCount < nutPool.Count)
         {
+            //Debug.Log("???");
             if (Input.GetKey(KeyCode.L))
             {
-                TurnNutOn(0);
+                TurnNutOn(0, currentNutRound);
+              //  Debug.Log("HITTING L");
+            }
+        }
+
+    }
+    void Round0()
+    {
+        for (int i = 0; i < yNutAmountSquare; i++)
+        {
+            //          Debug.Log("in first for loop");
+            for (int j = 0; j < xNutAmountSquare; j++)
+            {
+                //                Debug.Log("in second for loop");
+                nutPos = new Vector3(j * spaceX - nutX,
+                                         -i * spaceY + nutY,
+                                         nutZ);
+                newNut(nutPos);
             }
         }
         
     }
+    void Round1()
+    {
+        //top row: starts 3 to the left of the first original spot, stops one before first final spot on left
+        //second row through 9th row: 3 new on each side
+        //tenth row: 3 new on left, all new on bottom, 3 new on right
 
-    public void TurnNutOn(int tempInt)
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 1; j++)
+            {
+                nutPos = new Vector3(j * spaceX - nutX + spaceX*18,
+                                         -i * spaceY + nutY,
+                                         nutZ);
+                newNut(nutPos);
+                //Debug.Log("HI");
+            }
+        }
+
+        //CURRENTLY WORKING HERE
+        for (int i = 0; i < 1; i++)
+        {
+            for (int j = 18; j > 0; j--)
+            {
+                nutPos = new Vector3(j * spaceX - nutX + spaceX * 17,
+                                         -i * spaceY + nutY + spaceY * 8,
+                                         nutZ);
+                newNut(nutPos);
+                //Debug.Log("HI");
+            }
+        }
+    }
+    void Round2()
+    {
+
+    }
+    void Round3()
+    {
+
+    }    
+    void newNut(Vector3 nutPos)
+    {
+        GameObject tempNut = Instantiate(nutScoreObject, nutPos + gameObject.transform.position,
+                    Quaternion.Euler(gameObject.transform.rotation.x, gameObject.transform.rotation.y, gameObject.transform.rotation.z), gameObject.transform);
+        nutPool.Add(tempNut);
+        MeshRenderer[] meshrends = tempNut.GetComponentsInChildren<MeshRenderer>();
+        //Added in later when "nut art" is done.
+        for (int k = 0; k < meshrends.Length; k++)
+        {
+            meshrends[k].enabled = false;
+        }
+    }
+
+    public void TurnNutOn(int nutType, int nutRound)
     {
         nutCount++;
 
         MeshRenderer[] meshrends = nutPool[nutCount - 1].GetComponentsInChildren<MeshRenderer>();
-        meshrends[tempInt].enabled = true;
-        if(nutCount == xNutAmountSquare * yNutAmountSquare)
+        meshrends[nutType].enabled = true;
+        Debug.Log("we are out here");
+        if(nutCount == amountOfNutPerRound && nutRound == 0)
         {
-            SceneManager.LoadScene(2); //For playtesting builds
-            MoveEverythingBack(0);
+           // SceneManager.LoadScene(2); //For playtesting builds
+            MoveEverythingBack(roundPositions[1],0);
+            Debug.Log("we are in here");
+            currentNutRound = 1;
+            //amountOfNutPerRound = amountOfNutPerRound + 23 + 2 * (3 * 8) + 24;
+        }
+        else if(nutCount == amountOfNutPerRound && nutRound == 1)
+        {
+            MoveEverythingBack(roundPositions[2], 0);
+//          amountOfNutPerRound = amountOfNutPerRound + 
         }
     
     }
 
-    public void MoveEverythingBack(int j)
+    public void MoveEverythingBack(Vector3 roundPosition, int j)
     {
-        
-        if (j == 0)
-        {
-            Vector3 addVec = new Vector3(-0.02f, 0.08f, 0.89f) - gameObject.GetComponent<Transform>().position;
-            gameObject.GetComponent<Transform>().position = gameObject.GetComponent<Transform>().position + addVec;
-        }
-    
-
-
+        gameObject.GetComponent<Transform>().position = roundPosition;
+        currentNutRound++;
     }
     
 }

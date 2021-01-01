@@ -193,7 +193,7 @@ public class HammerAttack : MonoBehaviour
         {
             tempint = 2;
         }
-        scoreNutSpawner.TurnNutOn(tempint);
+        scoreNutSpawner.TurnNutOn(tempint,scoreNutSpawner.currentNutRound);
         Destroy(other.gameObject);
         print(other.gameObject);
         //scoreMovement.UpdateScore(score);

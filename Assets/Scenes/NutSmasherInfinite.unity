@@ -5898,6 +5898,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c15a435990e427aac4a91e1af43259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentNutRound: 0
+  amountOfNutPerRound: 0
   nutPrefabs:
   - {fileID: 5839209781083398133, guid: 9c60e665db5e34630bc826b40ef704a7, type: 3}
   - {fileID: 6774785700647072753, guid: e1068113fb5ec4803b70062c17a78d25, type: 3}
@@ -5911,8 +5913,8 @@ MonoBehaviour:
   nutScoreObject: {fileID: 1312435688716178506, guid: 7e01e699ce0e2485bbd940567e79d8f2,
     type: 3}
   cam: {fileID: 2050479156}
-  xNutAmountSquare: 18
-  yNutAmountSquare: 8
+  xNutAmountSquare: 0
+  yNutAmountSquare: 0
   spaceAmount: 400
   nutX: 7.25
   nutY: 5.2
@@ -17028,6 +17030,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c15a435990e427aac4a91e1af43259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentNutRound: 0
+  amountOfNutPerRound: 0
   nutPrefabs:
   - {fileID: 5839209781083398133, guid: 9c60e665db5e34630bc826b40ef704a7, type: 3}
   - {fileID: 6774785700647072753, guid: e1068113fb5ec4803b70062c17a78d25, type: 3}
@@ -18352,6 +18356,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c15a435990e427aac4a91e1af43259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentNutRound: 0
+  amountOfNutPerRound: 0
   nutPrefabs:
   - {fileID: 5839209781083398133, guid: 9c60e665db5e34630bc826b40ef704a7, type: 3}
   - {fileID: 6774785700647072753, guid: e1068113fb5ec4803b70062c17a78d25, type: 3}
@@ -18365,8 +18371,8 @@ MonoBehaviour:
   nutScoreObject: {fileID: 1312435688716178506, guid: 7e01e699ce0e2485bbd940567e79d8f2,
     type: 3}
   cam: {fileID: 1330188542}
-  xNutAmountSquare: 18
-  yNutAmountSquare: 8
+  xNutAmountSquare: 0
+  yNutAmountSquare: 0
   spaceAmount: 400
   nutX: 5.25
   nutY: 5
@@ -43627,7 +43633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1180987205
 Transform:
   m_ObjectHideFlags: 0
