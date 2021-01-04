@@ -166,7 +166,6 @@ public class ScoreNutSpawner : MonoBehaviour
               //  Debug.Log("HITTING L");
             }
         }
-
     }
     void Round0()
     {
@@ -449,7 +448,7 @@ public class ScoreNutSpawner : MonoBehaviour
                 //Debug.Log("HI");
             }
         }
-        amountOfNutPerRound[3] = amountOfNutPerRound[3] + 24;
+        amountOfNutPerRound[3] = amountOfNutPerRound[3] + 9;
         //going up, starting at left
         for (int i = 12; i > 0; i--)
         {
@@ -500,41 +499,56 @@ public class ScoreNutSpawner : MonoBehaviour
     {
         nutCount++;
 
-        //Debug.Log("nutCount: " + nutCount + " amountofNutPerRound[1]: " + amountOfNutPerRound[1] + " nutRound: " + nutRound);
-        int compiledNutPerRound = amountOfNutPerRound[0] + amountOfNutPerRound[1] + amountOfNutPerRound[2] + amountOfNutPerRound[3];
-        Debug.Log(nutCount + " " + compiledNutPerRound);
+        int compiledNutPerRound = 0;
+        switch (nutRound)
+        {
+            case 0:
+                compiledNutPerRound = amountOfNutPerRound[0];
+                break;
+            case 1:
+                compiledNutPerRound = amountOfNutPerRound[0] + amountOfNutPerRound[1];
+                break;
+            case 2:
+                compiledNutPerRound = amountOfNutPerRound[0] + amountOfNutPerRound[1] + amountOfNutPerRound[2];
+                break;
+            case 3:
+                compiledNutPerRound = amountOfNutPerRound[0] + amountOfNutPerRound[1] + amountOfNutPerRound[2] + amountOfNutPerRound[3];
+                break;
+        }
+        //Debug.Log("nutCount: " + nutCount + " compiledNutPerRound: " + compiledNutPerRound);
         MeshRenderer[] meshrends = nutPool[nutCount - 1].GetComponentsInChildren<MeshRenderer>();
         meshrends[nutType].enabled = true;
         //Debug.Log("we are out here");
-        if(nutCount == amountOfNutPerRound[0] && nutRound == 0)
+        if(nutCount == compiledNutPerRound)
         {
-           // SceneManager.LoadScene(2); //For playtesting builds
-            MoveEverythingBack(roundPositions[1],0);
-          //  Debug.Log("we are in here");
-            currentNutRound = 1;
-            //amountOfNutPerRound = amountOfNutPerRound + 23 + 2 * (3 * 8) + 24;
+            if (nutRound == 0)
+            {
+                // SceneManager.LoadScene(2); //For playtesting builds
+                MoveEverythingBack(roundPositions[1], 0);
+                //  Debug.Log("we are in here");
+                currentNutRound = 1;
+                //amountOfNutPerRound = amountOfNutPerRound + 23 + 2 * (3 * 8) + 24;
+            }
+            else if (nutRound == 1)
+            {
+                MoveEverythingBack(roundPositions[2], 0);
+                // amountOfNutPerRound = amountOfNutPerRound +
+                currentNutRound = 2;
+            }
+            else if (nutRound == 2)
+            {
+                MoveEverythingBack(roundPositions[3], 0);
+                // amountOfNutPerRound = amountOfNutPerRound +
+                currentNutRound = 3;
+            }
+            else if (nutRound == 3)
+            {
+                MoveEverythingBack(roundPositions[4], 0);
+                // amountOfNutPerRound = amountOfNutPerRound +
+                currentNutRound = 4;
+            }
         }
-        else if(nutCount == amountOfNutPerRound[1] + amountOfNutPerRound[0] && nutRound == 1)
-        {
-            MoveEverythingBack(roundPositions[2], 0);
-            // amountOfNutPerRound = amountOfNutPerRound +
-            currentNutRound = 2;
-
-        }
-        else if (nutCount == amountOfNutPerRound[1] + amountOfNutPerRound[0] + amountOfNutPerRound[2]&& nutRound == 2)
-        {
-            MoveEverythingBack(roundPositions[3], 0);
-            // amountOfNutPerRound = amountOfNutPerRound +
-            currentNutRound = 3;
-        }
-        else if (nutCount == amountOfNutPerRound[1] + amountOfNutPerRound[0] + amountOfNutPerRound[2] + amountOfNutPerRound[3] && nutRound == 3)
-        {
-            MoveEverythingBack(roundPositions[4], 0);
-            // amountOfNutPerRound = amountOfNutPerRound +
-   
-            currentNutRound = 4;
-
-        }
+        
 
     }
 
