@@ -32,8 +32,10 @@ public class ScoreNutSpawner : MonoBehaviour
 
     [HideInInspector]public int currentNutRound;
     [HideInInspector]public int[] amountOfNutPerRound; //hook this variable up
+    [HideInInspector] public bool nutsMovingBack;
 
-
+    [SerializeField]
+    private GameObject peanutGuide;
     [SerializeField]
     private GameObject[] nutPrefabs;
 
@@ -45,6 +47,7 @@ public class ScoreNutSpawner : MonoBehaviour
     [SerializeField]private Vector3 initialRot;
 
 
+    private int nutOverlayCycle;
     private int nutCount;
 
     private float screenWidth;
@@ -87,6 +90,8 @@ public class ScoreNutSpawner : MonoBehaviour
     
     private void Start()
     {
+        nutOverlayCycle = 0;
+        nutsMovingBack = false;
         compiledNutPerRound = 0;
         amountOfNutPerRound = new int[13];
         roundPositions[0] = new Vector3(gameObject.GetComponent<Transform>().position.x,gameObject.GetComponent<Transform>().position.y,gameObject.GetComponent<Transform>().position.z);
@@ -119,7 +124,6 @@ public class ScoreNutSpawner : MonoBehaviour
 
         heightRatio = (screenHeight / screenWidth);
         widthRatio = (screenWidth / screenHeight);
-        //Debug.Log(" widthRatio: " + widthRatio + " heightRatio: " + heightRatio + " screenWidth: " + screenWidth + " screenHeight: " + screenHeight);
         nutCount = 0;
        
 
@@ -154,9 +158,13 @@ public class ScoreNutSpawner : MonoBehaviour
     }
     private void Update()
     {
-        if (nutCount < nutPool.Count)
+        if (nutCount < nutPool.Count && !nutsMovingBack)
         {
             if (Input.GetKey(KeyCode.L))
+            {
+                TurnNutOn(0, currentNutRound);
+            }
+            if (Input.GetKeyDown(KeyCode.D))
             {
                 TurnNutOn(0, currentNutRound);
             }
@@ -959,11 +967,19 @@ public class ScoreNutSpawner : MonoBehaviour
 
     void newNut(Vector3 nutPos)
     {
-        GameObject tempNut = Instantiate(nutScoreObject, nutPos + gameObject.transform.position,
-                    Quaternion.Euler(gameObject.transform.rotation.x, gameObject.transform.rotation.y, gameObject.transform.rotation.z), gameObject.transform);
+        Vector3 addVec = new Vector3();
+       /* if(nutOverlayCycle == 0)
+        {
+            addVec = new Vector3(0, 0, 0);
+        }
+        else if(nutOverlayCycle == 1)
+        {
+            addVec = new Vector3(spaceX / 2, spaceY / 2, -.1f);
+        }*/
+        GameObject tempNut = Instantiate(nutScoreObject, nutPos + gameObject.transform.position + addVec,
+                   Quaternion.Euler(gameObject.transform.rotation.x, gameObject.transform.rotation.y, gameObject.transform.rotation.z), gameObject.transform);
         nutPool.Add(tempNut);
         MeshRenderer[] meshrends = tempNut.GetComponentsInChildren<MeshRenderer>();
-        //Added in later when "nut art" is done.
         for (int k = 0; k < meshrends.Length; k++)
         {
             meshrends[k].enabled = false;
@@ -1017,16 +1033,56 @@ public class ScoreNutSpawner : MonoBehaviour
         meshrends[nutType].enabled = true;
         if(nutCount == compiledNutPerRound)
         {
-            MoveEverythingBack(roundPositions[nutRound + 1], 0);
+            StartCoroutine(MoveOut(roundPositions[nutRound + 1], roundPositions[nutRound]));
+            if(currentNutRound == 11)
+            {
+                StartCoroutine(TurnPeanutOn());
+            }
             currentNutRound = nutRound + 1;
-            //Debug.Log("Next nutRound: " + currentNutRound);
+            nutsMovingBack = false;
         }
+        
     }
 
-    public void MoveEverythingBack(Vector3 roundPosition, int j)
+    public IEnumerator TurnPeanutOn()
     {
-        gameObject.GetComponent<Transform>().position = roundPosition;
-        currentNutRound++;
+        yield return new WaitForSeconds(1f);
+        float timer2 = 0;
+        Color c = new Color(255,255,255,0);
+        float alpha;
+        while (timer2 < 1)
+        {
+            peanutGuide.GetComponent<SpriteRenderer>().color = c;
+            alpha = Mathf.Lerp(0, 1, timer2);
+            c.a = alpha;
+            timer2 = timer2 + .001f;
+            yield return null;
+        }
+
+        /*for (int i = 0; i < nutPool.Count; i++)
+        {
+            GameObject nut = nutPool[i];
+            MeshRenderer[] meshrends = nut.GetComponentsInChildren<MeshRenderer>();
+            for (int k = 0; k < meshrends.Length; k++)
+            {
+                meshrends[k].enabled = false;
+            }
+        } */       
+        yield return null;
+    }
+    public IEnumerator MoveOut(Vector3 newRoundPos, Vector3 oldRoundPos)
+    {
+        nutsMovingBack = true;
+        float timer = 0;
+        
+        while (timer < 1)
+        {
+            gameObject.GetComponent<Transform>().position = Vector3.Lerp(oldRoundPos, newRoundPos, timer);
+            timer = timer + .01f;
+            
+            yield return null;
+        }
+        yield return null;
     }
     
 }

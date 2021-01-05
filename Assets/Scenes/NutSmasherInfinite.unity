@@ -5900,6 +5900,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentNutRound: 0
   amountOfNutPerRound: 
+  nutsMovingBack: 0
+  peanutGuide: {fileID: 151633333}
   nutPrefabs:
   - {fileID: 5839209781083398133, guid: 9c60e665db5e34630bc826b40ef704a7, type: 3}
   - {fileID: 6774785700647072753, guid: e1068113fb5ec4803b70062c17a78d25, type: 3}
@@ -5913,8 +5915,8 @@ MonoBehaviour:
   nutScoreObject: {fileID: 1312435688716178506, guid: 7e01e699ce0e2485bbd940567e79d8f2,
     type: 3}
   cam: {fileID: 2050479156}
-  xNutAmountSquare: 0
-  yNutAmountSquare: 0
+  xNutAmountSquare: 18
+  yNutAmountSquare: 8
   spaceAmount: 400
   nutX: 7.25
   nutY: 5.2
@@ -11313,7 +11315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &151633334
 Transform:
   m_ObjectHideFlags: 0
@@ -11369,7 +11371,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 280291a556a0848d4b3b6d6aef96013e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.23921569}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -11675,7 +11677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &229135741
 Transform:
   m_ObjectHideFlags: 0
@@ -17032,6 +17034,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentNutRound: 0
   amountOfNutPerRound: 
+  nutsMovingBack: 0
+  peanutGuide: {fileID: 1180987204}
   nutPrefabs:
   - {fileID: 5839209781083398133, guid: 9c60e665db5e34630bc826b40ef704a7, type: 3}
   - {fileID: 6774785700647072753, guid: e1068113fb5ec4803b70062c17a78d25, type: 3}
@@ -18359,6 +18363,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentNutRound: 0
   amountOfNutPerRound: 
+  nutsMovingBack: 0
+  peanutGuide: {fileID: 1535785236}
   nutPrefabs:
   - {fileID: 5839209781083398133, guid: 9c60e665db5e34630bc826b40ef704a7, type: 3}
   - {fileID: 6774785700647072753, guid: e1068113fb5ec4803b70062c17a78d25, type: 3}
@@ -18372,8 +18378,8 @@ MonoBehaviour:
   nutScoreObject: {fileID: 1312435688716178506, guid: 7e01e699ce0e2485bbd940567e79d8f2,
     type: 3}
   cam: {fileID: 1330188542}
-  xNutAmountSquare: 0
-  yNutAmountSquare: 0
+  xNutAmountSquare: 18
+  yNutAmountSquare: 8
   spaceAmount: 400
   nutX: 5.25
   nutY: 5
@@ -43634,7 +43640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1180987205
 Transform:
   m_ObjectHideFlags: 0
@@ -43689,7 +43695,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 280291a556a0848d4b3b6d6aef96013e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.23921569}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -56048,7 +56054,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1535785237
 Transform:
   m_ObjectHideFlags: 0
@@ -56057,8 +56063,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1535785236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.44, y: 3.16, z: 0}
-  m_LocalScale: {x: 2.2594104, y: 2.2594104, z: 2.2594104}
+  m_LocalPosition: {x: -1.84, y: 3.1581, z: 0}
+  m_LocalScale: {x: 1.6, y: 2.0204098, z: 2.2594104}
   m_Children:
   - {fileID: 1790581358}
   m_Father: {fileID: 502831132}
@@ -56104,7 +56110,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 280291a556a0848d4b3b6d6aef96013e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.23921569}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -58603,7 +58609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1790581358
 Transform:
   m_ObjectHideFlags: 0
