@@ -88,7 +88,7 @@ public class ScoreNutSpawner : MonoBehaviour
     private void Start()
     {
         compiledNutPerRound = 0;
-        amountOfNutPerRound = new int[10];
+        amountOfNutPerRound = new int[13];
         roundPositions[0] = new Vector3(gameObject.GetComponent<Transform>().position.x,gameObject.GetComponent<Transform>().position.y,gameObject.GetComponent<Transform>().position.z);
         roundPositions[1] = new Vector3(0.03f,0.4f,-0.4f);
         roundPositions[2] = new Vector3(0.03f,0.59f,1.34f);
@@ -96,10 +96,10 @@ public class ScoreNutSpawner : MonoBehaviour
         roundPositions[4] = new Vector3(0.03f,1.16f,5.4f);
         roundPositions[5] = new Vector3(0.08f,1.34f,7.19f);
         roundPositions[6] = new Vector3(0.08f,1.7f,8.76f);
-        roundPositions[7] = new Vector3(-0.15f,1.95f,10.9f);
-        roundPositions[8] = new Vector3(-0.62f,2.2f,12.69f);
-        roundPositions[9] = new Vector3(-0.62f,2.38f,14.49f);
-        roundPositions[10] = new Vector3(-0.62f,2.83f,16.46f);
+        roundPositions[7] = new Vector3(-1f,2f,11.5f);
+        roundPositions[8] = new Vector3(-0.8f,2.5f,13f);
+        roundPositions[9] = new Vector3(-1f,2.8f,15f);
+        roundPositions[10] = new Vector3(-0.62f,3f,17f);
         roundPositions[11] = new Vector3(1.2f,3.44f,18.08f);
         roundPositions[12] = new Vector3(1.73f,4.18f,21.32f);
 
@@ -146,23 +146,19 @@ public class ScoreNutSpawner : MonoBehaviour
         Round4();
         Round5();
         Round6();
-        //Round 7
-        //Round 8
-        //Round 9
-        //Round 10
-        //Round 11
-        //Round 12
+        Round7();
+        Round8();
+        Round9();
+        Round10();
+        Round11();
     }
     private void Update()
     {
-        //Debug.Log(nutCount +" "+ nutPool.Count);
         if (nutCount < nutPool.Count)
         {
-            //Debug.Log("???");
             if (Input.GetKey(KeyCode.L))
             {
                 TurnNutOn(0, currentNutRound);
-              //  Debug.Log("HITTING L");
             }
         }
     }
@@ -736,10 +732,229 @@ public class ScoreNutSpawner : MonoBehaviour
         }
         amountOfNutPerRound[6] = amountOfNutPerRound[6] + 12;
     }
-
     void Round7()
     {
-
+        amountOfNutPerRound[7] = 0;
+        //going down, starting right
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 1; j++)
+            {
+                nutPos = new Vector3(j * spaceX - nutX + spaceX * 32,
+                                         -i * spaceY + nutY - spaceY * 9,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[7] = amountOfNutPerRound[7] + 5;
+        //going left, starting bottom
+        for (int i = 0; i < 1; i++)
+        {
+            for (int j = 25; j > -1; j--)
+            {
+                nutPos = new Vector3(j * spaceX - nutX + spaceX * 6,
+                                         -i * spaceY + nutY - spaceY * 14,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[7] = amountOfNutPerRound[7] + 26;
+        //going up, starting at left
+        for (int i = 12; i > 0; i--)
+        {
+            for (int j = 0; j < 1; j++)
+            {
+                nutPos = new Vector3(j * spaceX - nutX - spaceX * 15,
+                                         -i * spaceY + nutY + spaceY * 7,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[7] = amountOfNutPerRound[7] + 12;
+        //going right, starting at top
+        for (int i = 0; i < 1; i++)
+        {
+            for (int j = 0; j < xNutAmountSquare + 2; j++)
+            {
+                nutPos = new Vector3(j * spaceX - nutX - 15 * spaceX,
+                                         -i * spaceY + nutY + 7 * spaceY,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[7] = amountOfNutPerRound[7] + xNutAmountSquare + 2;
+        //going up, starting at left
+        for (int i = 12; i > 0; i--)
+        {
+            for (int j = 0; j < 1; j++)
+            {
+                nutPos = new Vector3(j * spaceX - nutX - spaceX * 16,
+                                         -i * spaceY + nutY + spaceY * 8,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[7] = amountOfNutPerRound[7] + 12;
+    }
+    void Round8()
+    {
+        amountOfNutPerRound[8] = 0;
+        //going left, starting bottom
+        for (int i = 0; i < 1; i++)
+        {
+            for (int j = 23; j > -1; j--)
+            {
+                nutPos = new Vector3(j * spaceX - nutX + spaceX * 8,
+                                         -i * spaceY + nutY - spaceY * 15,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[8] = amountOfNutPerRound[8] + 24;
+        //going up, starting at left
+        for (int i = 12; i > 0; i--)
+        {
+            for (int j = 0; j < 1; j++)
+            {
+                nutPos = new Vector3(j * spaceX - nutX - spaceX * 17,
+                                         -i * spaceY + nutY + spaceY * 8,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[8] = amountOfNutPerRound[8] + 12;
+        //going right, starting at top
+        for (int i = 0; i < 1; i++)
+        {
+            for (int j = 0; j < xNutAmountSquare; j++)
+            {
+                nutPos = new Vector3(j * spaceX - nutX - 15 * spaceX,
+                                         -i * spaceY + nutY + 8 * spaceY,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[8] = amountOfNutPerRound[8] + xNutAmountSquare;
+        //going up, starting at left
+        for (int i = 10; i > 0; i--)
+        {
+            for (int j = 0; j < 1; j++)
+            {
+                nutPos = new Vector3(j * spaceX - nutX - spaceX * 18,
+                                         -i * spaceY + nutY + spaceY * 7,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[8] = amountOfNutPerRound[8] + 10;
+    }
+    void Round9()
+    {
+        amountOfNutPerRound[9] = 0;
+        //going left, starting bottom
+        for (int i = 0; i < 1; i++)
+        {
+            for (int j = 20; j > -1; j--)
+            {
+                nutPos = new Vector3(j * spaceX - nutX + spaceX * 10,
+                                         -i * spaceY + nutY - spaceY * 16,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[9] = amountOfNutPerRound[9] + 21;
+        //going up, starting at left
+        for (int i = 8; i > 0; i--)
+        {
+            for (int j = 0; j < 1; j++)
+            {
+                nutPos = new Vector3(j * spaceX - nutX - spaceX * 19,
+                                         -i * spaceY + nutY + spaceY * 6,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[9] = amountOfNutPerRound[9] + 8;
+        //going right, starting at top
+        for (int i = 0; i < 1; i++)
+        {
+            for (int j = 0; j < xNutAmountSquare - 4; j++)
+            {
+                nutPos = new Vector3(j * spaceX - nutX - 12 * spaceX,
+                                         -i * spaceY + nutY + 9 * spaceY,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[9] = amountOfNutPerRound[9] + xNutAmountSquare - 4;
+        //going up, starting at left
+        for (int i = 6; i > 0; i--)
+        {
+            for (int j = 0; j < 1; j++)
+            {
+                nutPos = new Vector3(j * spaceX - nutX - spaceX * 20,
+                                         -i * spaceY + nutY + spaceY * 5,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[9] = amountOfNutPerRound[9] + 6;
+    }
+    void Round10()
+    {
+        amountOfNutPerRound[10] = 0;
+        //going left, starting bottom
+        for (int i = 0; i < 1; i++)
+        {
+            for (int j = 16; j > -1; j--)
+            {
+                nutPos = new Vector3(j * spaceX - nutX + spaceX * 12,
+                                         -i * spaceY + nutY - spaceY * 17,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[10] = amountOfNutPerRound[10] + 17;
+        //going up, starting at left
+        for (int i = 4; i > 0; i--)
+        {
+            for (int j = 0; j < 1; j++)
+            {
+                nutPos = new Vector3(j * spaceX - nutX - spaceX * 21,
+                                         -i * spaceY + nutY + spaceY * 4,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[10] = amountOfNutPerRound[10] + 4;
+        //going right, starting at top
+        for (int i = 0; i < 1; i++)
+        {
+            for (int j = 0; j < xNutAmountSquare - 11; j++)
+            {
+                nutPos = new Vector3(j * spaceX - nutX - 7 * spaceX,
+                                         -i * spaceY + nutY + 10 * spaceY,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[10] = amountOfNutPerRound[10] + xNutAmountSquare - 11;
+    }
+    void Round11()
+    {
+        amountOfNutPerRound[11] = 0;
+        //going left, starting bottom
+        for (int i = 0; i < 1; i++)
+        {
+            for (int j = 8; j > -1; j--)
+            {
+                nutPos = new Vector3(j * spaceX - nutX + spaceX * 16,
+                                         -i * spaceY + nutY - spaceY * 18,
+                                         nutZ);
+                newNut(nutPos);
+            }
+        }
+        amountOfNutPerRound[11] = amountOfNutPerRound[11] + 9;
     }
 
     void newNut(Vector3 nutPos)
@@ -781,48 +996,30 @@ public class ScoreNutSpawner : MonoBehaviour
             case 6:
                 compiledNutPerRound = amountOfNutPerRound[0] + amountOfNutPerRound[1] + amountOfNutPerRound[2] + amountOfNutPerRound[3] + amountOfNutPerRound[4] + amountOfNutPerRound[5] + amountOfNutPerRound[6];
                 break;
+            case 7:
+                compiledNutPerRound = amountOfNutPerRound[0] + amountOfNutPerRound[1] + amountOfNutPerRound[2] + amountOfNutPerRound[3] + amountOfNutPerRound[4] + amountOfNutPerRound[5] + amountOfNutPerRound[6] + amountOfNutPerRound[7];
+                break;
+            case 8:
+                compiledNutPerRound = amountOfNutPerRound[0] + amountOfNutPerRound[1] + amountOfNutPerRound[2] + amountOfNutPerRound[3] + amountOfNutPerRound[4] + amountOfNutPerRound[5] + amountOfNutPerRound[6] + amountOfNutPerRound[7] + amountOfNutPerRound[8];
+                break;
+            case 9:
+                compiledNutPerRound = amountOfNutPerRound[0] + amountOfNutPerRound[1] + amountOfNutPerRound[2] + amountOfNutPerRound[3] + amountOfNutPerRound[4] + amountOfNutPerRound[5] + amountOfNutPerRound[6] + amountOfNutPerRound[7] + amountOfNutPerRound[8] + amountOfNutPerRound[9];
+                break;
+            case 10:
+                compiledNutPerRound = amountOfNutPerRound[0] + amountOfNutPerRound[1] + amountOfNutPerRound[2] + amountOfNutPerRound[3] + amountOfNutPerRound[4] + amountOfNutPerRound[5] + amountOfNutPerRound[6] + amountOfNutPerRound[7] + amountOfNutPerRound[8] + amountOfNutPerRound[9] + amountOfNutPerRound[10];
+                break;
+            case 11:
+                compiledNutPerRound = amountOfNutPerRound[0] + amountOfNutPerRound[1] + amountOfNutPerRound[2] + amountOfNutPerRound[3] + amountOfNutPerRound[4] + amountOfNutPerRound[5] + amountOfNutPerRound[6] + amountOfNutPerRound[7] + amountOfNutPerRound[8] + amountOfNutPerRound[9] + amountOfNutPerRound[10] + amountOfNutPerRound[11];
+                break;
         }
         //Debug.Log("nutCount: " + nutCount + " compiledNutPerRound: " + compiledNutPerRound);
         MeshRenderer[] meshrends = nutPool[nutCount - 1].GetComponentsInChildren<MeshRenderer>();
         meshrends[nutType].enabled = true;
         if(nutCount == compiledNutPerRound)
         {
-            if (nutRound == 0)
-            {
-                // SceneManager.LoadScene(2); //For playtesting builds
-                MoveEverythingBack(roundPositions[nutRound + 1], 0);
-                currentNutRound = nutRound + 1;
-            }
-            else if (nutRound == 1)
-            {
-                MoveEverythingBack(roundPositions[nutRound + 1], 0);
-                currentNutRound = nutRound + 1;
-            }
-            else if (nutRound == 2)
-            {
-                MoveEverythingBack(roundPositions[nutRound + 1], 0);
-                currentNutRound = nutRound + 1;
-            }
-            else if (nutRound == 3)
-            {
-                MoveEverythingBack(roundPositions[nutRound + 1], 0);
-                currentNutRound = nutRound + 1;
-            }
-            else if (nutRound == 4)
-            {
-                MoveEverythingBack(roundPositions[nutRound + 1], 0);
-                currentNutRound = nutRound + 1;
-            }
-            else if (nutRound == 5)
-            {
-                MoveEverythingBack(roundPositions[nutRound + 1], 0);
-                currentNutRound = nutRound + 1;
-            }
-            else if (nutRound == 6)
-            {
-                MoveEverythingBack(roundPositions[nutRound + 1], 0);
-                currentNutRound = nutRound + 1;
-            }
+            MoveEverythingBack(roundPositions[nutRound + 1], 0);
+            currentNutRound = nutRound + 1;
+            //Debug.Log("Next nutRound: " + currentNutRound);
         }
     }
 
