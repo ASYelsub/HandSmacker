@@ -27,6 +27,7 @@ public class ScoreNutSpawner : MonoBehaviour
      */
 
     private Vector3[] roundPositions = new Vector3[13];
+    private Vector3[] roundPositions2 = new Vector3[13];
     private int amountAddedToSides;
     private int amountAddedToTopAndBottom;
 
@@ -95,6 +96,7 @@ public class ScoreNutSpawner : MonoBehaviour
         compiledNutPerRound = 0;
         amountOfNutPerRound = new int[13];
         roundPositions[0] = new Vector3(gameObject.GetComponent<Transform>().position.x,gameObject.GetComponent<Transform>().position.y,gameObject.GetComponent<Transform>().position.z);
+        roundPositions2[0] = new Vector3(0.03f, 0.4f, -2f);
         roundPositions[1] = new Vector3(0.03f,0.4f,-0.4f);
         roundPositions[2] = new Vector3(0.03f,0.59f,1.34f);
         roundPositions[3] = new Vector3(0.03f,0.88f,3f);
@@ -143,17 +145,53 @@ public class ScoreNutSpawner : MonoBehaviour
     {
         yNutAmountSquare = initialYNutAmount;
         xNutAmountSquare = initialXNutAmount;
+        nutOverlayCycle = 0;
         Round0();
+        nutOverlayCycle = 1;
+        Round0();
+        nutOverlayCycle = 0;
         Round1();
+        nutOverlayCycle = 1;
+        Round1();
+        nutOverlayCycle = 0;
         Round2();
+        nutOverlayCycle = 1;
+        Round2();
+        nutOverlayCycle = 0;
         Round3();
+        nutOverlayCycle = 1;
+        Round3();
+        nutOverlayCycle = 0;
         Round4();
+        nutOverlayCycle = 1;
+        Round4();
+        nutOverlayCycle = 0;
         Round5();
+        nutOverlayCycle = 1;
+        Round5();
+        nutOverlayCycle = 0;
         Round6();
+        nutOverlayCycle = 1;
+        Round6();
+        nutOverlayCycle = 0;
         Round7();
+        nutOverlayCycle = 1;
+        Round7();
+        nutOverlayCycle = 0;
         Round8();
+        nutOverlayCycle = 1;
+        Round8();
+        nutOverlayCycle = 0;
         Round9();
+        nutOverlayCycle = 1;
+        Round9();
+        nutOverlayCycle = 0;
         Round10();
+        nutOverlayCycle = 1;
+        Round10();
+        nutOverlayCycle = 0;
+        Round11();
+        nutOverlayCycle = 1;
         Round11();
     }
     private void Update()
@@ -968,14 +1006,14 @@ public class ScoreNutSpawner : MonoBehaviour
     void newNut(Vector3 nutPos)
     {
         Vector3 addVec = new Vector3();
-       /* if(nutOverlayCycle == 0)
+        if(nutOverlayCycle == 0)
         {
             addVec = new Vector3(0, 0, 0);
         }
         else if(nutOverlayCycle == 1)
         {
             addVec = new Vector3(spaceX / 2, spaceY / 2, -.1f);
-        }*/
+        }
         GameObject tempNut = Instantiate(nutScoreObject, nutPos + gameObject.transform.position + addVec,
                    Quaternion.Euler(gameObject.transform.rotation.x, gameObject.transform.rotation.y, gameObject.transform.rotation.z), gameObject.transform);
         nutPool.Add(tempNut);
@@ -1031,15 +1069,17 @@ public class ScoreNutSpawner : MonoBehaviour
         //Debug.Log("nutCount: " + nutCount + " compiledNutPerRound: " + compiledNutPerRound);
         MeshRenderer[] meshrends = nutPool[nutCount - 1].GetComponentsInChildren<MeshRenderer>();
         meshrends[nutType].enabled = true;
-        if(nutCount == compiledNutPerRound)
+        if(nutCount/2 == compiledNutPerRound)
         {
-            StartCoroutine(MoveOut(roundPositions[nutRound + 1], roundPositions[nutRound]));
+            StartCoroutine(MoveOut(roundPositions[nutRound + 1], roundPositions2[nutRound]));
             if(currentNutRound == 11)
             {
                 StartCoroutine(TurnPeanutOn());
             }
             currentNutRound = nutRound + 1;
-            nutsMovingBack = false;
+        }else if(nutCount == compiledNutPerRound)
+        {
+            StartCoroutine(MoveOut(roundPositions2[nutRound], roundPositions[nutRound]));
         }
         
     }
@@ -1072,6 +1112,7 @@ public class ScoreNutSpawner : MonoBehaviour
     }
     public IEnumerator MoveOut(Vector3 newRoundPos, Vector3 oldRoundPos)
     {
+        
         nutsMovingBack = true;
         float timer = 0;
         
@@ -1082,6 +1123,7 @@ public class ScoreNutSpawner : MonoBehaviour
             
             yield return null;
         }
+        nutsMovingBack = false;
         yield return null;
     }
     

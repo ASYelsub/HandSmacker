@@ -61877,9 +61877,9 @@ MonoBehaviour:
   sixteenByNineSS: {fileID: 1222942630}
   fourByThreeSS: {fileID: 2056941609}
   eighteenByNineSS: {fileID: 152968989}
-  cam16x9SS: {fileID: 0}
-  cam4x3SS: {fileID: 0}
-  cam18x9SS: {fileID: 0}
+  cam16x9SS: {fileID: 111258365}
+  cam4x3SS: {fileID: 1330188542}
+  cam18x9SS: {fileID: 2050479156}
 --- !u!1001 &5526603033133137765
 PrefabInstance:
   m_ObjectHideFlags: 0
