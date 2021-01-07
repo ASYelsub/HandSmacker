@@ -96,19 +96,31 @@ public class ScoreNutSpawner : MonoBehaviour
         compiledNutPerRound = 0;
         amountOfNutPerRound = new int[13];
         roundPositions[0] = new Vector3(gameObject.GetComponent<Transform>().position.x,gameObject.GetComponent<Transform>().position.y,gameObject.GetComponent<Transform>().position.z);
-        roundPositions2[0] = new Vector3(0.03f, 0.4f, -2f);
-        roundPositions[1] = new Vector3(0.03f,0.4f,-0.4f);
+        roundPositions2[0] = new Vector3(-0.3f, 0.4f, -2.3f);
+        roundPositions[1] = new Vector3(0.03f,0.4f,-0.3f);
+        roundPositions2[1] = new Vector3(0.03f,0.5f,-0.4f);
         roundPositions[2] = new Vector3(0.03f,0.59f,1.34f);
+        roundPositions2[2] = new Vector3(0.03f,0.59f,1.34f);
         roundPositions[3] = new Vector3(0.03f,0.88f,3f);
+        roundPositions2[3] = new Vector3(0.03f,0.88f,3f);
         roundPositions[4] = new Vector3(0.03f,1.16f,5.4f);
+        roundPositions2[4] = new Vector3(0.03f,1.16f,5.4f);
         roundPositions[5] = new Vector3(0.08f,1.34f,7.19f);
+        roundPositions2[5] = new Vector3(0.08f,1.34f,7.19f);
         roundPositions[6] = new Vector3(0.08f,1.7f,8.76f);
+        roundPositions2[6] = new Vector3(0.08f,1.7f,8.76f);
         roundPositions[7] = new Vector3(-1f,2f,11.5f);
+        roundPositions2[7] = new Vector3(-1f,2f,11.5f);
         roundPositions[8] = new Vector3(-0.8f,2.5f,13f);
+        roundPositions2[8] = new Vector3(-0.8f,2.5f,13f);
         roundPositions[9] = new Vector3(-1f,2.8f,15f);
+        roundPositions2[9] = new Vector3(-1f,2.8f,15f);
         roundPositions[10] = new Vector3(-0.62f,3f,17f);
+        roundPositions2[10] = new Vector3(-0.62f,3f,17f);
         roundPositions[11] = new Vector3(1.2f,3.44f,18.08f);
+        roundPositions2[11] = new Vector3(1.2f,3.44f,18.08f);
         roundPositions[12] = new Vector3(1.73f,4.18f,21.32f);
+        roundPositions2[12] = new Vector3(1.73f,4.18f,21.32f);
 
         nutZ = 0f;
 
@@ -143,6 +155,10 @@ public class ScoreNutSpawner : MonoBehaviour
 
     void NutPool()
     {
+        for (int i = 0; i < amountOfNutPerRound.Length; i++)
+        {
+            amountOfNutPerRound[i] = 0;
+        }
         yNutAmountSquare = initialYNutAmount;
         xNutAmountSquare = initialXNutAmount;
         nutOverlayCycle = 0;
@@ -226,7 +242,6 @@ public class ScoreNutSpawner : MonoBehaviour
     }
     void Round1()
     {
-        amountOfNutPerRound[1] = 0;
         //top row: starts 3 to the left of the first original spot, stops one before first final spot on left
         //second row through 9th row: 3 new on each side
         //tenth row: 3 new on left, all new on bottom, 3 new on right
@@ -339,7 +354,6 @@ public class ScoreNutSpawner : MonoBehaviour
     }
     void Round2()
     {
-        amountOfNutPerRound[2] = 0;
         //going down, starting on right
         for (int i = 0; i < 9; i++)
         {
@@ -422,7 +436,6 @@ public class ScoreNutSpawner : MonoBehaviour
     }
     void Round3()
     {
-        amountOfNutPerRound[3] = 0;
         //going down, starting on right
         for (int i = 0; i < 9; i++)
         {
@@ -507,7 +520,6 @@ public class ScoreNutSpawner : MonoBehaviour
     void Round4()
     {
         //going down, starting right
-        amountOfNutPerRound[4] = 0;
         for (int i = 0; i < 8; i++)
         {
             for (int j = 0; j < 1; j++)
@@ -616,7 +628,6 @@ public class ScoreNutSpawner : MonoBehaviour
     }
     void Round5()
     {
-        amountOfNutPerRound[5] = 0;
         //going down, starting right
         for (int i = 0; i < 8; i++)
         {
@@ -700,7 +711,6 @@ public class ScoreNutSpawner : MonoBehaviour
     }
     void Round6()
     {
-        amountOfNutPerRound[6] = 0;
         //going down, starting right
         for (int i = 0; i < 7; i++)
         {
@@ -780,7 +790,6 @@ public class ScoreNutSpawner : MonoBehaviour
     }
     void Round7()
     {
-        amountOfNutPerRound[7] = 0;
         //going down, starting right
         for (int i = 0; i < 5; i++)
         {
@@ -844,7 +853,6 @@ public class ScoreNutSpawner : MonoBehaviour
     }
     void Round8()
     {
-        amountOfNutPerRound[8] = 0;
         //going left, starting bottom
         for (int i = 0; i < 1; i++)
         {
@@ -896,7 +904,6 @@ public class ScoreNutSpawner : MonoBehaviour
     }
     void Round9()
     {
-        amountOfNutPerRound[9] = 0;
         //going left, starting bottom
         for (int i = 0; i < 1; i++)
         {
@@ -948,7 +955,6 @@ public class ScoreNutSpawner : MonoBehaviour
     }
     void Round10()
     {
-        amountOfNutPerRound[10] = 0;
         //going left, starting bottom
         for (int i = 0; i < 1; i++)
         {
@@ -988,7 +994,6 @@ public class ScoreNutSpawner : MonoBehaviour
     }
     void Round11()
     {
-        amountOfNutPerRound[11] = 0;
         //going left, starting bottom
         for (int i = 0; i < 1; i++)
         {
@@ -1012,7 +1017,7 @@ public class ScoreNutSpawner : MonoBehaviour
         }
         else if(nutOverlayCycle == 1)
         {
-            addVec = new Vector3(spaceX / 2, spaceY / 2, -.1f);
+            addVec = new Vector3(spaceX / 2, -spaceY / 2, -.1f);
         }
         GameObject tempNut = Instantiate(nutScoreObject, nutPos + gameObject.transform.position + addVec,
                    Quaternion.Euler(gameObject.transform.rotation.x, gameObject.transform.rotation.y, gameObject.transform.rotation.z), gameObject.transform);
@@ -1066,7 +1071,7 @@ public class ScoreNutSpawner : MonoBehaviour
                 compiledNutPerRound = amountOfNutPerRound[0] + amountOfNutPerRound[1] + amountOfNutPerRound[2] + amountOfNutPerRound[3] + amountOfNutPerRound[4] + amountOfNutPerRound[5] + amountOfNutPerRound[6] + amountOfNutPerRound[7] + amountOfNutPerRound[8] + amountOfNutPerRound[9] + amountOfNutPerRound[10] + amountOfNutPerRound[11];
                 break;
         }
-        //Debug.Log("nutCount: " + nutCount + " compiledNutPerRound: " + compiledNutPerRound);
+        Debug.Log("nutCount: " + nutCount + " compiledNutPerRound: " + compiledNutPerRound);
         MeshRenderer[] meshrends = nutPool[nutCount - 1].GetComponentsInChildren<MeshRenderer>();
         meshrends[nutType].enabled = true;
         if(nutCount/2 == compiledNutPerRound)
@@ -1080,6 +1085,7 @@ public class ScoreNutSpawner : MonoBehaviour
         }else if(nutCount == compiledNutPerRound)
         {
             StartCoroutine(MoveOut(roundPositions2[nutRound], roundPositions[nutRound]));
+            Debug.Log("Hello");
         }
         
     }
