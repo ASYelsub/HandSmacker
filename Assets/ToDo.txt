@@ -1,4 +1,5 @@
-
+FOR IOS:
+-ICON 1024x1024, no transparency, go into each category and set biggest one to that 1024x1024 thing, autofills ones below it
 
 Todo:
 -refactor nut score code in nested for-loop with giant object pool in the beginning, score counted by turning on/off different mesh renderers,
