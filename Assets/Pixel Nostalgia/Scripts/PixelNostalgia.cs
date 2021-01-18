@@ -14,7 +14,7 @@ namespace DFA
     /// are modified by the effect, however overlay effects will not be modified.
     /// </remarks>
     [RequireComponent(typeof(Camera)), ExecuteInEditMode, AddComponentMenu("DFA/Pixel Nostalgia"), Serializable]
-    public sealed class PixelNostalgia : MonoBehaviour
+    public class PixelNostalgia : MonoBehaviour
     {
         /// <summary>
         /// Modify the settings here. This object is read-only.

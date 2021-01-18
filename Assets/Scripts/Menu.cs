@@ -175,16 +175,18 @@ public class Menu : MonoBehaviour
     void Update()
     {
         MouseInputs();
+    }
+    private void FixedUpdate()
+    {
         if (Input.GetKeyDown(KeyCode.Escape) && !menuIsMoving)
         {
             TurnMenuOnOff(menuOn);
             menuIsMoving = true;
         }
-        if(shootRay)
+        if (shootRay)
         {
             ButtonRay();
         }
-  
     }
 
     void MouseInputs()
