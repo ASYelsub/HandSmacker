@@ -13,6 +13,9 @@ public class AspectManager : MonoBehaviour
     [SerializeField] private Camera cam16x9SS;
     [SerializeField] private Camera cam4x3SS;
     [SerializeField] private Camera cam18x9SS;
+    [SerializeField] private ScoreNutSpawner scoreNutSpawner16x9;
+    [SerializeField] private ScoreNutSpawner scoreNutSpawner4x3;
+    [SerializeField] private ScoreNutSpawner scoreNutSpawner18x9;
 
     private float screenWidth;
     private float screenHeight;
@@ -21,20 +24,17 @@ public class AspectManager : MonoBehaviour
     {
         screenHeight = Screen.height;
         screenWidth = Screen.width;
-    }
-
-    private void Start()
-    {
-        if(screenWidth/screenHeight <= 1.65f)
+        if (screenWidth / screenHeight <= 1.65f)
         {
             //4x3
             fourByThreeSS.SetActive(true);
             sixteenByNineSS.SetActive(false);
             eighteenByNineSS.SetActive(false);
             StartCoroutine(RefreshCam(0));
-     
 
-        }else if(screenWidth/screenHeight >= 2.0f)
+
+        }
+        if (screenWidth / screenHeight >= 2.0f)
         {
             //18x9
             fourByThreeSS.SetActive(false);
@@ -42,7 +42,7 @@ public class AspectManager : MonoBehaviour
             eighteenByNineSS.SetActive(true);
             StartCoroutine(RefreshCam(1));
         }
-        else
+        if (screenWidth / screenHeight < 2.0f && screenWidth / screenHeight > 1.65f)
         {
             //16x9
             fourByThreeSS.SetActive(false);
@@ -50,30 +50,59 @@ public class AspectManager : MonoBehaviour
             eighteenByNineSS.SetActive(false);
             StartCoroutine(RefreshCam(2));
         }
-
     }
 
     public IEnumerator RefreshCam(int camType)
     {
         
-        yield return new WaitForSecondsRealtime(.1f);
-        switch (camType)
+        yield return new WaitForSecondsRealtime(.01f);
+        if(StartScript.currentScene == 0)
         {
-            case 0:
-                cam4x3SS.gameObject.GetComponent<PixelNostalgia>().enabled = false;
-                cam4x3SS.gameObject.GetComponent<PixelNostalgia>().enabled = true;
-                break;
-            case 1:
-                cam18x9SS.gameObject.GetComponent<PixelNostalgia>().enabled = false;
-                cam18x9SS.gameObject.GetComponent<PixelNostalgia>().enabled = true;
-                break;
-            case 2:
-                
-                cam16x9SS.gameObject.GetComponent<PixelNostalgia>().enabled = false;
-                cam16x9SS.gameObject.GetComponent<PixelNostalgia>().enabled = true;
-                Debug.Log("HELLO");
-                break;
+            switch (camType)
+            {
+                case 0:
+                    cam4x3SS.gameObject.GetComponent<PixelNostalgia>().enabled = false;
+                    yield return new WaitForSecondsRealtime(.01f);
+                    cam4x3SS.gameObject.GetComponent<PixelNostalgia>().enabled = true;
+                    break;
+                case 1:
+                    cam18x9SS.gameObject.GetComponent<PixelNostalgia>().enabled = false;
+                    yield return new WaitForSecondsRealtime(.01f);
+                    cam18x9SS.gameObject.GetComponent<PixelNostalgia>().enabled = true;
+                    break;
+                case 2:
+                    cam16x9SS.gameObject.GetComponent<PixelNostalgia>().enabled = false;
+                    yield return new WaitForSecondsRealtime(.01f);
+                    cam16x9SS.gameObject.GetComponent<PixelNostalgia>().enabled = true;
+                    Debug.Log("HELLO");
+                    break;
+            }
         }
+        else{
+            switch (camType)
+            {
+                case 0:
+                    cam4x3SS.gameObject.GetComponent<PixelNostalgia>().enabled = false;
+                    yield return new WaitForSecondsRealtime(.01f);
+                    cam4x3SS.gameObject.GetComponent<PixelNostalgia>().enabled = true;
+                   //scoreNutSpawner4x3.
+                    break;
+                case 1:
+                    cam18x9SS.gameObject.GetComponent<PixelNostalgia>().enabled = false;
+                    yield return new WaitForSecondsRealtime(.01f);
+                    cam18x9SS.gameObject.GetComponent<PixelNostalgia>().enabled = true;
+                    //scoreNutSpawner18x9.NutPool();
+                    break;
+                case 2:
+                    cam16x9SS.gameObject.GetComponent<PixelNostalgia>().enabled = false;
+                    yield return new WaitForSecondsRealtime(.01f);
+                    cam16x9SS.gameObject.GetComponent<PixelNostalgia>().enabled = true;
+                    //scoreNutSpawner16x9.NutPool();
+                    Debug.Log("HELLO");
+                    break;
+            }
+        }
+        
         yield return null;
     }
 

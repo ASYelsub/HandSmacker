@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nutVector: {x: -0.02, y: 0, z: 0}
-  nutLimit: {x: -9.5, y: 0, z: 0}
+  nutLimit: {x: -9.7, y: 0, z: 0}
 --- !u!1001 &2398961921803146567
 PrefabInstance:
   m_ObjectHideFlags: 0

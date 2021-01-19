@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nutVector: {x: -0.02, y: 0, z: 0}
-  nutLimit: {x: -9.5, y: 0, z: 0}
+  nutLimit: {x: -9.7, y: 0, z: 0}
 --- !u!1 &3290487362820479110
 GameObject:
   m_ObjectHideFlags: 0

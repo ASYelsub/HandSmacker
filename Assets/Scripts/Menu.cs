@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DFA;
 using UnityEngine;
 
 public class Menu : MonoBehaviour
@@ -18,8 +19,10 @@ public class Menu : MonoBehaviour
     [Header ("Options")]
     [SerializeField] private GameObject hapticsToggle;
     [SerializeField] private GameObject screenshakeToggle;
+    [SerializeField] private GameObject shaderToggle;
     [HideInInspector]public bool hapticsOn;
     [HideInInspector]public bool screenshakeOn;
+    [HideInInspector] public bool shaderOn;
 
 
     [Header("Audio Stuff")]
@@ -45,6 +48,7 @@ public class Menu : MonoBehaviour
         screenshakeOn = true;
         hapticsOn = true;
         shootRay = false;
+        shaderOn = true;
         //scale of 0.126693,0.126693,0.08172395
         menuOn = false;
         menuIsMoving = false;
@@ -148,7 +152,7 @@ public class Menu : MonoBehaviour
         {
             enterTransform.localPosition = Vector3.Lerp(enterPos, enterHiddenPos, timer);
             menuTransform.localPosition = Vector3.Lerp(menuOffPos, menuOnPos, timer);
-            timer = timer + .01f;
+            timer = timer + .03f;
             //Debug.Log(timer);
             yield return null;
         }
@@ -164,7 +168,7 @@ public class Menu : MonoBehaviour
         {
             enterTransform.localPosition = Vector3.Lerp(enterHiddenPos, enterPos, timer);
             menuTransform.localPosition = Vector3.Lerp(menuOnPos, menuOffPos, timer);
-            timer = timer + .01f;
+            timer = timer + .03f;
             yield return null;
         }
         menuIsMoving = false;
@@ -205,6 +209,22 @@ public class Menu : MonoBehaviour
             }
             
         }
+    }
+
+    void toggleShader()
+    {
+        sfxSource.PlayOneShot(click);
+        if (cam.gameObject.GetComponent<PixelNostalgia>().enabled == true)
+        {
+            cam.gameObject.GetComponent<PixelNostalgia>().enabled = false;
+            shaderToggle.GetComponent<MeshRenderer>().enabled = false;
+        }
+        else
+        {
+            cam.gameObject.GetComponent<PixelNostalgia>().enabled = true;
+            shaderToggle.GetComponent<MeshRenderer>().enabled = true;
+        }
+        shaderOn = !shaderOn;
     }
 
     void toggleScreenShake()
@@ -317,6 +337,10 @@ public class Menu : MonoBehaviour
             if(hit.collider.tag == "Screenshake")
             {
                 toggleScreenShake();
+            }
+            if(hit.collider.tag == "Shader")
+            {
+                toggleShader();
             }
 
         }

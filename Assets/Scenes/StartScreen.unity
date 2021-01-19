@@ -3584,7 +3584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asciiLUT: {fileID: 2800000, guid: 211859bb972d28f41ba44f3c67ad1705, type: 3}
   bayerIndex: 3
-  windowSize: {x: 256, y: 240}
+  windowSize: {x: 300, y: 300}
   rBitDepth: 3
   gBitDepth: 3
   bBitDepth: 2
@@ -3593,11 +3593,11 @@ MonoBehaviour:
   autoSelectSeparation: 0
   ditherSeparation: 256
   doDithering: 1
-  matchCameraSize: 1
+  matchCameraSize: 0
   doAscii: 0
   doCRT: 0
   scalarSize: 0.25
-  customWindowSize: {x: 128, y: 128}
+  customWindowSize: {x: 300, y: 300}
   selectedSizeOption: 3
   selectedBitDepthOption: 0
 --- !u!1 &847490853

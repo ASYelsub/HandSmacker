@@ -25,6 +25,7 @@ TagManager:
   - Music7
   - Screenshake
   - Haptics
+  - Shader
   layers:
   - Default
   - TransparentFX

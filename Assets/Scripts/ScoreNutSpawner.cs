@@ -39,9 +39,6 @@ public class ScoreNutSpawner : MonoBehaviour
     [SerializeField]
     private GameObject[] nutPrefabs;
 
-    [SerializeField] 
-    private GameObject[] insertedNutTypes;
-
 
     [SerializeField]private Vector3 initialPos;
     [SerializeField]private Vector3 initialRot;
@@ -87,26 +84,26 @@ public class ScoreNutSpawner : MonoBehaviour
     private int compiledNutPerRound;
 
     private List<GameObject> nutPool = new List<GameObject>();
-    
-    private void Start()
+
+    public void Start()
     {
         nutOverlayCycle = 0;
         nutsMovingBack = false;
         compiledNutPerRound = 0;
         amountOfNutPerRound = new int[13];
-        roundPositions[0] = new Vector3(gameObject.GetComponent<Transform>().position.x,gameObject.GetComponent<Transform>().position.y,gameObject.GetComponent<Transform>().position.z);
-        roundPositions[1] = new Vector3(0.03f,0.4f,-0.4f);
-        roundPositions[2] = new Vector3(0.03f,0.59f,1.34f);
-        roundPositions[3] = new Vector3(0.03f,0.88f,3f);
-        roundPositions[4] = new Vector3(0.03f,1.16f,5.4f);
-        roundPositions[5] = new Vector3(0.08f,1.34f,7.19f);
-        roundPositions[6] = new Vector3(0.08f,1.7f,8.76f);
-        roundPositions[7] = new Vector3(-1f,2f,11.5f);
-        roundPositions[8] = new Vector3(-0.8f,2.5f,13f);
-        roundPositions[9] = new Vector3(-1f,2.8f,15f);
-        roundPositions[10] = new Vector3(-0.62f,3f,17f);
-        roundPositions[11] = new Vector3(1.2f,3.44f,18.08f);
-        roundPositions[12] = new Vector3(1.73f,4.18f,21.32f);
+        roundPositions[0] = new Vector3(gameObject.GetComponent<Transform>().position.x, gameObject.GetComponent<Transform>().position.y, gameObject.GetComponent<Transform>().position.z);
+        roundPositions[1] = new Vector3(0.03f, 0.4f, -0.4f);
+        roundPositions[2] = new Vector3(0.03f, 0.59f, 1.34f);
+        roundPositions[3] = new Vector3(0.03f, 0.88f, 3f);
+        roundPositions[4] = new Vector3(0.03f, 1.16f, 5.4f);
+        roundPositions[5] = new Vector3(0.08f, 1.34f, 7.19f);
+        roundPositions[6] = new Vector3(0.08f, 1.7f, 8.76f);
+        roundPositions[7] = new Vector3(-1f, 2f, 11.5f);
+        roundPositions[8] = new Vector3(-0.8f, 2.5f, 13f);
+        roundPositions[9] = new Vector3(-1f, 2.8f, 15f);
+        roundPositions[10] = new Vector3(-0.62f, 3f, 17f);
+        roundPositions[11] = new Vector3(1.2f, 3.44f, 18.08f);
+        roundPositions[12] = new Vector3(1.73f, 4.18f, 21.32f);
 
         nutZ = 0f;
 
@@ -125,7 +122,7 @@ public class ScoreNutSpawner : MonoBehaviour
         heightRatio = (screenHeight / screenWidth);
         widthRatio = (screenWidth / screenHeight);
         nutCount = 0;
-       
+
 
 
         nutSpacerWidth = (screenWidth / (xNutAmountSquare * spaceAmount)) * widthRatio;
@@ -134,13 +131,12 @@ public class ScoreNutSpawner : MonoBehaviour
         //I THINK this is correct??? for aspect ratio stuff
         //nutStartX = widthRatio * nutX;
         //nutStartY = heightRatio * nutY;
-
         NutPool();
     }
-    
 
     void NutPool()
     {
+        
         yNutAmountSquare = initialYNutAmount;
         xNutAmountSquare = initialXNutAmount;
         Round0();

@@ -26,9 +26,13 @@ public class StartScript : MonoBehaviour
     [SerializeField]
     private AudioClip iceCrack;
 
+    public static int currentScene;
+
     
     private void Start()
     {
+        currentScene = 0;
+        DontDestroyOnLoad(gameObject);
         optionsOn = false;
         creditsOn = false;
         menuIsMoving = false;
@@ -46,8 +50,16 @@ public class StartScript : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        StartCoroutine(soundWait());
+    }
+
+    public IEnumerator soundWait()
+    {
         gameObject.GetComponent<AudioSource>().PlayOneShot(iceCrack);
+        yield return new WaitForSeconds(.5f);
+        SceneManager.LoadScene(1);
+        currentScene = 1;
+        yield return null;
     }
 
     public void startCreditFunc(bool creditsOn)
