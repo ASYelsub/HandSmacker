@@ -104,28 +104,7 @@ public class HammerAttack : MonoBehaviour
                         int randomInt = UnityEngine.Random.Range(0, hammerSound.Length);
                         hingeAudioSource.PlayOneShot(hammerSound[randomInt]);
                         hammerSpark.Emit(30);
-                    }
-
-                    
-                    
-                        //Am currently unsure how screen shake should manifest for non-nut hammering.
-                        //Don't want to mentally exhaust the player by having them see the screen shake too much.
-                        //Also the impact of the nut smash is lessened if there is screen shake all the time.
-                        //To change "nutcollision" just get rid of the exclamation... i think? There's probably more that needs to be tweaked but yeah.
-                        if (nutCollision)
-                        {
-                            if (menu.screenshakeOn)
-                            {
-                                StartCoroutine(cameraShake.Shake(1f * cameraShake.duration, 1f * cameraShake.magnitude));
-                            }
-                            if (menu.hapticsOn)
-                            {
-                                HapticFeedbackIOS.ImpactFeedback(2);
-                            }
-                    }
-
-                    
-                    
+                    }                              
                     /*
                     if (!flowerGen.enumRunning) {
                         StartCoroutine(flowerGen.SpawnFlower(fireworkTimer));
@@ -135,7 +114,7 @@ public class HammerAttack : MonoBehaviour
 
                     //scoreMovement.UpdateScoreMultiplier(fireworkTimerInt);
                     fireworkTimer = 0;
-                    nutCollision = false;
+                    
                 }
             }
             if (hammerIsGoingUp)
@@ -193,13 +172,23 @@ public class HammerAttack : MonoBehaviour
         {
             tempint = 2;
         }
+        if (menu.screenshakeOn)
+        {
+            StartCoroutine(cameraShake.Shake(cameraShake.duration, cameraShake.magnitude));
+        }
+        //if (menu.hapticsOn)
+            // {
+            //   HapticFeedbackIOS.ImpactFeedback(2);
+            // }
         scoreNutSpawner.TurnNutOn(tempint,scoreNutSpawner.currentNutRound);
         Destroy(other.gameObject);
-        print(other.gameObject);
+        Debug.Log(other.gameObject);
+        //print(other.gameObject);
         //scoreMovement.UpdateScore(score);
         /*if (!cameraShake.corIsRunning)
         {
             StartCoroutine(cameraShake.Shake(cameraShake.duration, cameraShake.magnitude));
         }*/
+        nutCollision = false;
     }
 }

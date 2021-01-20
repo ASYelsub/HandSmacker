@@ -30,7 +30,7 @@ public class CameraShake : MonoBehaviour
             float x = Random.Range(-screenShakeSize, screenShakeSize) * magnitude;
             float y = Random.Range(-screenShakeSize, screenShakeSize) * magnitude;
 
-            transform.position = new Vector3(x, y, -10f);
+            transform.position = new Vector3(orignalPosition.x + x, orignalPosition.y + y, -10f);
             elapsed += Time.deltaTime;
             yield return 0;
         }

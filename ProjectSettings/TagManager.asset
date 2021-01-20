@@ -26,6 +26,12 @@ TagManager:
   - Screenshake
   - Haptics
   - Shader
+  - Pink
+  - Purple
+  - Green
+  - Teal
+  - Blue
+  - Red
   layers:
   - Default
   - TransparentFX

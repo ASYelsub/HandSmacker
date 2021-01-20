@@ -43,6 +43,12 @@ public class Menu : MonoBehaviour
     public Ray buttonRay;
     Vector3 point;
     Vector3 worldPos;
+
+    [Header("Lights")]
+    [SerializeField] private Light light1;
+    [SerializeField] private Light light2;
+    [SerializeField] private GameObject[] tickmarks;
+
     void Start()
     {
         screenshakeOn = true;
@@ -343,7 +349,34 @@ public class Menu : MonoBehaviour
                 toggleShader();
             }
 
+            //Colors
+            if(hit.collider.tag == "Pink")
+            {
+                setColor(0);
+            }
+            if(hit.collider.tag == "Purple")
+            {
+                setColor(1);
+            }
+            if(hit.collider.tag == "Teal")
+            {
+                setColor(2);
+            }
+            if(hit.collider.tag == "Red")
+            {
+                setColor(3);
+            }
+            if(hit.collider.tag == "Green")
+            {
+                setColor(4);
+            }
+
         }
         shootRay = false;
+    }
+
+    void setColor(int i)
+    {
+
     }
 }
