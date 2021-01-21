@@ -164,13 +164,13 @@ public class HammerAttack : MonoBehaviour
         hingeAudioSource.PlayOneShot(nutCrunch);
         if (other.gameObject.CompareTag("almond"))
         {
-            tempint = 0;
+            tempint = 2;
         }else if (other.gameObject.CompareTag("cashew"))
         {
             tempint = 1;
         }else if (other.gameObject.CompareTag("pecan"))
         {
-            tempint = 2;
+            tempint = 0;
         }
         if (menu.screenshakeOn)
         {
