@@ -158,12 +158,13 @@ public class ScoreNutSpawner : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.L))
             {
-                TurnNutOn(0, currentNutRound);
+                int r = UnityEngine.Random.Range(0, 3);
+                TurnNutOn(r, currentNutRound);
             }
-            if (Input.GetKeyDown(KeyCode.D))
+           /* if (Input.GetKeyDown(KeyCode.D))
             {
                 TurnNutOn(0, currentNutRound);
-            }
+            }*/
         }
     }
     void Round0()
